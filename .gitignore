@@ -1,0 +1,10 @@
+# ignore backups of text files on linux
+*~
+
+node_modules/
+
+*.log
+
+# ignore transpiled files
+dev/
+dist/

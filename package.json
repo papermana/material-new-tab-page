@@ -1,0 +1,28 @@
+{
+  "name": "new-tab-page-react-3.5",
+  "version": "0.7.0",
+  "description": "Material New Tab Page for Chrome",
+  "repository": "",
+  "licence": "",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "flux": "^2.1.1",
+    "immutable": "^3.8.1",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
+    "reactcss": "^1.0.4"
+  },
+  "devDependencies": {
+    "@papermana/eslint-config-basic": "^1.0.0",
+    "babel-loader": "^6.2.4",
+    "babel-preset-react": "^6.11.1",
+    "eslint": "^3.0.1",
+    "eslint-plugin-jasmine": "^1.8.1",
+    "eslint-plugin-react": "^5.2.2",
+    "jest-cli": "^13.2.3",
+    "react-addons-test-utils": "^15.2.1",
+    "webpack": "^1.13.1"
+  }
+}
