@@ -46,10 +46,10 @@ const config = {
   resolve: {
     root,
     alias: {
-      '@js': 'js/',
-      '@stores': 'js/stores/',
-      '@components': 'js/components/',
-      '@utils': 'js/utils/',
+      '@js': 'app/js',
+      '@stores': 'app/js/stores',
+      '@components': 'app/js/components',
+      '@utils': 'app/js/utils',
     },
     extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx'],
   },
