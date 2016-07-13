@@ -6,6 +6,9 @@
     "jest": true,
     "jasmine": true
   },
+  "globals": {
+    "chrome": false
+  },
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
