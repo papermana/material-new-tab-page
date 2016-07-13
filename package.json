@@ -27,5 +27,17 @@
     "jest-cli": "^13.2.3",
     "react-addons-test-utils": "^15.2.1",
     "webpack": "^1.13.1"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleNameMapper": {
+      "@js": "<rootDir>/app/js",
+      "@stores": "<rootDir>/app/js/stores",
+      "@components": "<rootDir>/app/js/components",
+      "@utils": "<rootDir>/app/js/utils"
+    }
   }
 }
