@@ -13,7 +13,9 @@ function createAction(name) {
 const actionCreators = {};
 
 [
-
+  'permissionsGranted',
+  'permissionsRevoked',
+  'initAppsStore',
 ]
 .forEach(string => createAction(string));
 
