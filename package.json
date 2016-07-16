@@ -34,6 +34,13 @@
     "moduleFileExtensions": [
       "js",
       "jsx"
+    ],
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/flux",
+      "<rootDir>/node_modules/immutable",
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-dom",
+      "<rootDir>/node_modules/reactcss"
     ]
   }
 }
