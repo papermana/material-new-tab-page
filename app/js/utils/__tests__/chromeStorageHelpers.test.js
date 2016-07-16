@@ -1,6 +1,6 @@
 jest.unmock('@utils/chromeStorageHelpers');
 
-const helpers = require('@utils/chromeStorageHelpers.js');
+const helpers = require('@utils/chromeStorageHelpers');
 
 describe('`chromeStorageHelper.js` - Helpers for interacting with Chrome\'s sync storage API', () => {
   beforeEach(() => {
