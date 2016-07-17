@@ -1,15 +1,7 @@
-const Immutable = require('immutable');
 const actionCreators = require('@js/actionCreators');
 const storageHelpers = require('@utils/chromeStorageHelpers');
+const AppRecord = require('@stores/AppRecord');
 
-
-const App = Immutable.Record({
-  id: undefined,
-  name: undefined,
-  description: undefined,
-  url: undefined,
-  icon: undefined,
-});
 
 function init() {
   return new Promise((resolve, reject) => {
@@ -22,7 +14,7 @@ function init() {
     .filter(app => {
       return ['hosted_app', 'packaged_app', 'legacy_packaged_app'].includes(app.type) && app.enabled;
     })
-    .map(app => new App({
+    .map(app => new AppRecord({
       id: app.id,
       name: app.shortName || app.name,
       description: app.description || app.name || app.shortName,
@@ -30,7 +22,7 @@ function init() {
       icon: findIcon(app, PREFERRED_ICON_SIZE),
     }));
 
-    apps.push(new App({
+    apps.push(new AppRecord({
       id: 'chrome-web-store',
       name: 'Chrome Web Store',
       description: 'Get more apps at Google Web Store!',
@@ -66,6 +58,9 @@ function init() {
         .slice(0, 12)
         .map(app => app.id);
       }
+
+      favoriteApps = favoriteApps
+      .slice(0, 12);
 
       return {
         allApps,
