@@ -1,6 +1,8 @@
 const actionCreators = require('@js/actionCreators');
 const storageHelpers = require('@utils/chromeStorageHelpers');
-const AppRecord = require('@stores/AppRecord');
+const {
+  App: AppRecord,
+} = require('@stores/AppsStore/appsStoreDataTypes');
 
 
 function init() {

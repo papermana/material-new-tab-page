@@ -1,10 +1,12 @@
-jest.unmock('@stores/appsStoreInit');
-jest.unmock('@stores/AppRecord');
+jest.unmock('@stores/AppsStore/appsStoreInit');
+jest.unmock('@stores/AppsStore/appsStoreDataTypes');
 
-const init = require('@stores/appsStoreInit');
+const init = require('@stores/AppsStore/appsStoreInit');
 const actionCreators = require('@js/actionCreators');
 const storageHelpers = require('@utils/chromeStorageHelpers');
-const AppRecord = require('@stores/AppRecord');
+const {
+  App: AppRecord,
+} = require('@stores/AppsStore/appsStoreDataTypes');
 
 describe('`AppsStoreInit.js` - An init function for initializing `AppsStore`', () => {
   function mockGetAll(results) {

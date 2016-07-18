@@ -1,9 +1,11 @@
 jest.unmock('@stores/AppsStore');
 jest.unmock('immutable');
-jest.unmock('@stores/AppsStoreStateRecord');
+jest.unmock('@stores/AppsStore/appsStoreDataTypes');
 
 const Immutable = require('immutable');
-const AppsStoreStateRecord = require('@stores/AppsStoreStateRecord');
+const {
+  AppsStoreState: AppsStoreStateRecord,
+} = require('@stores/AppsStore/appsStoreDataTypes');
 let dispatcher;
 let AppsStore;
 let callback;
@@ -46,7 +48,7 @@ describe('`AppsStore` - Store responsible for retrieving a list of apps from Chr
   });
 
   it('calls `appsStoreInit` upon receiving the `permissionsGranted` action that includes an `apps` property set to `true`; then returns state unchanged', () => {
-    const init = require('@stores/appsStoreInit');
+    const init = require('@stores/AppsStore/appsStoreInit');
     const state = AppsStore.getState();
 
     callback({
@@ -61,7 +63,7 @@ describe('`AppsStore` - Store responsible for retrieving a list of apps from Chr
   });
 
   it('doesn\'t do anything if the `permissionsGranted` action doesn\t have a property `apps` set to `true`', () => {
-    const init = require('@stores/appsStoreInit');
+    const init = require('@stores/AppsStore/appsStoreInit');
     const state = AppsStore.getState();
 
     callback({

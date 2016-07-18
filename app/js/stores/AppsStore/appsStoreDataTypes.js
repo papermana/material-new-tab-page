@@ -1,6 +1,12 @@
 const Immutable = require('immutable');
 
 
+const AppsStoreState = Immutable.Record({
+  apps: undefined,
+  favoriteApps: undefined,
+  ready: false,
+});
+
 const App = Immutable.Record({
   id: undefined,
   name: undefined,
@@ -10,4 +16,7 @@ const App = Immutable.Record({
 });
 
 
-module.exports = App;
+module.exports = {
+  AppsStoreState,
+  App,
+};
