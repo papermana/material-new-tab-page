@@ -1,4 +1,7 @@
 const Immutable = require('immutable');
+const {
+  TileElement,
+} = require('@js/dataTypes');
 
 
 const AppsStoreState = Immutable.Record({
@@ -7,13 +10,7 @@ const AppsStoreState = Immutable.Record({
   ready: false,
 });
 
-const App = Immutable.Record({
-  id: undefined,
-  name: undefined,
-  description: undefined,
-  url: undefined,
-  icon: undefined,
-});
+const App = TileElement;
 
 
 module.exports = {

@@ -1,5 +1,6 @@
 jest.unmock('@stores/AppsStore/AppsStore.init');
 jest.unmock('@stores/AppsStore/AppsStore.dataTypes');
+jest.unmock('@js/dataTypes');
 
 const init = require('@stores/AppsStore/AppsStore.init');
 const actionCreators = require('@js/actionCreators');
