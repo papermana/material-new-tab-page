@@ -1,14 +1,14 @@
-jest.unmock('@stores/AppsStore/appsStoreInit');
-jest.unmock('@stores/AppsStore/appsStoreDataTypes');
+jest.unmock('@stores/AppsStore/appsStore.init');
+jest.unmock('@stores/AppsStore/appsStore.dataTypes');
 
-const init = require('@stores/AppsStore/appsStoreInit');
+const init = require('@stores/AppsStore/appsStore.init');
 const actionCreators = require('@js/actionCreators');
 const storageHelpers = require('@utils/chromeStorageHelpers');
 const {
   App: AppRecord,
-} = require('@stores/AppsStore/appsStoreDataTypes');
+} = require('@stores/AppsStore/appsStore.dataTypes');
 
-describe('`AppsStoreInit.js` - An init function for initializing `AppsStore`', () => {
+describe('`appsStore.init.js` - An init function for initializing `AppsStore`', () => {
   function mockGetAll(results) {
     window.chrome = {
       management: {
@@ -140,7 +140,7 @@ describe('`AppsStoreInit.js` - An init function for initializing `AppsStore`', (
   });
 
   it('should include url\'s to icons whose size is equal to the preferred size, or else the biggest possible', () => {
-    //  This just has to be manually synced with `appsStoreInit.js`:
+    //  This just has to be manually synced with `appsStore.init.js`:
     const PREFERRED_SIZE = 128;
 
     mockGetAll([

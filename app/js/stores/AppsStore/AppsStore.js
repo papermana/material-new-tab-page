@@ -2,10 +2,10 @@ const {
   ReduceStore,
 } = require('flux/utils');
 const Dispatcher = require('@js/dispatcher');
-const init = require('@stores/AppsStore/appsStoreInit');
+const init = require('@stores/AppsStore/appsStore.init');
 const {
   AppsStoreState,
-} = require('@stores/AppsStore/appsStoreDataTypes');
+} = require('@stores/AppsStore/appsStore.dataTypes');
 
 
 class AppsStore extends ReduceStore {
