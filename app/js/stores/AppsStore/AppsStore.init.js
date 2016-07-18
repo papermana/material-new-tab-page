@@ -2,7 +2,7 @@ const actionCreators = require('@js/actionCreators');
 const storageHelpers = require('@utils/chromeStorageHelpers');
 const {
   App: AppRecord,
-} = require('@stores/AppsStore/appsStore.dataTypes');
+} = require('@stores/AppsStore/AppsStore.dataTypes');
 
 
 function init() {
