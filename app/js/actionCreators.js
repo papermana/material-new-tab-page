@@ -17,6 +17,8 @@ const actionCreators = {};
   'permissionsRevoked',
   'initAppsStore',
   'initTopSitesStore',
+  'initConfigStore',
+  'setConfig',
   'goTo',
   'goBack',
   'setSearchValue',
