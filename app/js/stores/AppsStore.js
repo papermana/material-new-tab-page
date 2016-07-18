@@ -2,15 +2,9 @@ const {
   ReduceStore,
 } = require('flux/utils');
 const Dispatcher = require('@js/dispatcher');
-const Immutable = require('immutable');
 const init = require('@stores/appsStoreInit');
+const AppsStoreState = require('@stores/AppsStoreStateRecord');
 
-
-const AppsStoreState = Immutable.Record({
-  apps: undefined,
-  favoriteApps: undefined,
-  ready: false,
-});
 
 class AppsStore extends ReduceStore {
   getInitialState() {
