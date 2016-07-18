@@ -17,6 +17,10 @@ const actionCreators = {};
   'permissionsRevoked',
   'initAppsStore',
   'initTopSitesStore',
+  'goTo',
+  'goBack',
+  'setSearchValue',
+  'setSearchResults',
 ]
 .forEach(string => createAction(string));
 
