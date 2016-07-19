@@ -1,4 +1,7 @@
 const Immutable = require('immutable');
+const {
+  TileElement,
+} = require('@js/dataTypes');
 
 
 const StateStoreState = Immutable.Record({
@@ -7,7 +10,10 @@ const StateStoreState = Immutable.Record({
   ready: true,
 });
 
+const SearchElement = TileElement;
+
 
 module.exports = {
   StateStoreState,
+  SearchElement,
 };
