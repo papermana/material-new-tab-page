@@ -7,7 +7,21 @@ const ConfigStoreState = Immutable.Record({
   ready: false,
 });
 
+const Features = Immutable.Record({
+  apps: false,
+  topSites: false,
+  bookmarks: false,
+  weather: false,
+});
+
+const SearchEngine = Immutable.Record({
+  name: undefined,
+  url: undefined,
+});
+
 
 module.exports = {
   ConfigStoreState,
+  Features,
+  SearchEngine,
 };

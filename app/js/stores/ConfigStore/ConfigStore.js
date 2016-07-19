@@ -22,8 +22,6 @@ class ConfigStore extends ReduceStore {
 
       return state
       .merge(action.data)
-      // .set('features', action.data.features)
-      // .set('searchEngine', action.data.searchEngine)
       .set('ready', true);
     }
     else if (action.type === 'setConfig') {

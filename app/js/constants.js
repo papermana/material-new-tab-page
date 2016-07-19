@@ -14,5 +14,20 @@ constants.propTypes = {
   ]),
 };
 
+constants.searchEngines = [
+  {
+    name: 'Google',
+    url: 'https://google.com/search?q=',
+  },
+  {
+    name: 'Bing',
+    url: 'https://bing.com/search?q=',
+  },
+  {
+    name: 'DuckDuckGo',
+    url: 'https://duckduckgo.com/?q=',
+  },
+];
+
 
 module.exports = constants;
