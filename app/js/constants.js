@@ -6,7 +6,12 @@ const constants = {};
 
 constants.propTypes = {
   MODEL: React.PropTypes.shape({
-
+    state: React.PropTypes.instanceOf(Immutable.Record),
+    config: React.PropTypes.instanceOf(Immutable.Record),
+    apps: React.PropTypes.instanceOf(Immutable.Record),
+    favoriteApps: React.PropTypes.instanceOf(Immutable.Record),
+    topSites: React.PropTypes.instanceOf(Immutable.Record),
+    weather: React.PropTypes.instanceOf(Immutable.Record),
   }),
   CHILDREN: React.PropTypes.oneOfType([
     React.PropTypes.arrayOf(React.PropTypes.node),
