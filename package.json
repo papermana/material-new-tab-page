@@ -12,8 +12,10 @@
   "dependencies": {
     "flux": "^2.1.1",
     "immutable": "^3.8.1",
+    "material-ui": "^0.15.2",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
+    "react-tap-event-plugin": "^1.0.0",
     "reactcss": "^1.0.4"
   },
   "devDependencies": {
