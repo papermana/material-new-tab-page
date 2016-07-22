@@ -35,25 +35,26 @@ function isStoreReady(store, property) {
 //  We're using a Flux mixin and an old school `React.createClass()` method here, because at the time of writing this the official Flux library doesn't seem to work with untraspiled ES6 classes.
 //  If this ever gets fixed, the following might be changed to use a class:
 const AppContainer = React.createClass({
-  mixins: [fluxMixin.Container],
-  getStores() {
-    return [
+  mixins: [
+    fluxMixin([
       StateStore,
       ConfigStore,
       AppsStore,
       TopSitesStore,
       WeatherStore,
-    ];
-  },
-  calculateState(prevState) {
-    return {
-      state: isStoreReady(StateStore),
-      config: isStoreReady(ConfigStore),
-      apps: isStoreReady(AppsStore, 'apps'),
-      favoriteApps: isStoreReady(AppsStore, 'favoriteApps'),
-      topSites: isStoreReady(TopSitesStore),
-      weather: isStoreReady(WeatherStore),
-    };
+    ]),
+  ],
+  statics: {
+    calculateState(prevState) {
+      return {
+        state: isStoreReady(StateStore),
+        config: isStoreReady(ConfigStore),
+        apps: isStoreReady(AppsStore, 'apps'),
+        favoriteApps: isStoreReady(AppsStore, 'favoriteApps'),
+        topSites: isStoreReady(TopSitesStore),
+        weather: isStoreReady(WeatherStore),
+      };
+    },
   },
   render() {
     return <AppUi model={this.state} />;
