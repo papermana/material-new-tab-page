@@ -58,6 +58,9 @@ const config = {
       {
         from: 'index.html',
       },
+      {
+        from: 'manifest.json',
+      },
     ]),
   ],
 };

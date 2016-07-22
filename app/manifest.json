@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Material New Tab Page",
+  "version": "0.7.0",
+  "description": "Material New Tab Page for Chrome",
+  "permissions": [
+    "storage"
+  ],
+  "optional_permissions": [
+    "management",
+    "topSites",
+    "chrome://favicon/*",
+    "bookmarks",
+    "geolocation",
+    "http://api.openweathermap.org/"
+  ],
+  "chrome_url_overrides": { "newtab": "index.html" }
+}
