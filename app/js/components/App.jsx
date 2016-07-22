@@ -3,6 +3,11 @@ const {
   Mixin: fluxMixin,
 } = require('flux/utils');
 const AppUi = require('@components/AppUi');
+const StateStore = require('@stores/StateStore');
+const ConfigStore = require('@stores/ConfigStore');
+const AppsStore = require('@stores/AppsStore');
+const TopSitesStore = require('@stores/TopSitesStore');
+const WeatherStore = require('@stores/WeatherStore');
 
 
 /**
@@ -33,16 +38,25 @@ const AppContainer = React.createClass({
   mixins: [fluxMixin.Container],
   getStores() {
     return [
-
+      StateStore,
+      ConfigStore,
+      AppsStore,
+      TopSitesStore,
+      WeatherStore,
     ];
   },
   calculateState(prevState) {
     return {
-
+      state: isStoreReady(StateStore),
+      config: isStoreReady(ConfigStore),
+      apps: isStoreReady(AppsStore, 'apps'),
+      favoriteApps: isStoreReady(AppsStore, 'favoriteApps'),
+      topSites: isStoreReady(TopSitesStore),
+      weather: isStoreReady(WeatherStore),
     };
   },
   render() {
-    return <AppUi model={{}} />;
+    return <AppUi model={this.state} />;
   },
 });
 
