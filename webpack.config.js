@@ -61,6 +61,14 @@ const config = {
       {
         from: 'manifest.json',
       },
+      {
+        from: 'assets',
+        to: 'assets',
+      },
+      {
+        from: 'css',
+        to: 'css',
+      },
     ]),
   ],
 };
