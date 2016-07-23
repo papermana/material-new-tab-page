@@ -25,7 +25,7 @@ function isStoreReady(store, property) {
   }
 
   if (property) {
-    return state.get('property');
+    return state.get(property);
   }
   else {
     return state.remove('ready');

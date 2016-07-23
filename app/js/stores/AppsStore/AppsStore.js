@@ -1,3 +1,4 @@
+const Immutable = require('immutable');
 const {
   ReduceStore,
 } = require('flux/utils');
@@ -31,8 +32,8 @@ class AppsStore extends ReduceStore {
     }
     else if (action.type === 'initAppsStore') {
       return state
-      .set('apps', action.data.allApps)
-      .set('favoriteApps', action.data.favoriteApps)
+      .set('apps', Immutable.fromJS(action.data.allApps))
+      .set('favoriteApps', Immutable.fromJS(action.data.favoriteApps))
       .set('ready', true);
     }
     else {

@@ -8,15 +8,32 @@ constants.propTypes = {
   MODEL: React.PropTypes.shape({
     state: React.PropTypes.instanceOf(Immutable.Record),
     config: React.PropTypes.instanceOf(Immutable.Record),
-    apps: React.PropTypes.instanceOf(Immutable.Record),
-    favoriteApps: React.PropTypes.instanceOf(Immutable.Record),
-    topSites: React.PropTypes.instanceOf(Immutable.Record),
+    apps: React.PropTypes.instanceOf(Immutable.List),
+    favoriteApps: React.PropTypes.instanceOf(Immutable.List),
+    topSites: React.PropTypes.instanceOf(Immutable.List),
     weather: React.PropTypes.instanceOf(Immutable.Record),
   }),
+  DIMENSIONS: React.PropTypes.shape({
+    width: React.PropTypes.number.isRequired,
+    height: React.PropTypes.number.isRequired,
+  }),
+  TILE: React.PropTypes.instanceOf(Immutable.Record),
   CHILDREN: React.PropTypes.oneOfType([
     React.PropTypes.arrayOf(React.PropTypes.node),
     React.PropTypes.node,
   ]),
+};
+
+//  Desktop breakpoints accorting to Material Design spec:
+//  Values are maximum widths in pixels.
+//  xsmall is supposed to use 4 columns,
+//  small -- 8, and any larger than that -- 12.
+constants.breakpoints = {
+  xsmall: 600,
+  small: 840,
+  medium: 1280,
+  large: 1920,
+  xlarge: Infinity,
 };
 
 constants.searchEngines = [

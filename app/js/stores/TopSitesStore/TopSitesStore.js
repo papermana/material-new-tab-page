@@ -1,3 +1,4 @@
+const Immutable = require('immutable');
 const {
   ReduceStore,
 } = require('flux/utils');
@@ -31,7 +32,7 @@ class TopSitesStore extends ReduceStore {
     }
     else if (action.type === 'initTopSitesStore') {
       return state
-      .set('sites', action.data)
+      .set('sites', Immutable.fromJS(action.data))
       .set('ready', true);
     }
     else {
