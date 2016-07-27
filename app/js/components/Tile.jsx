@@ -7,7 +7,7 @@ const consts = require('@js/constants');
 
 class Tile extends React.Component {
   clickFunc(app) {
-    if (app.has('url')) {
+    if (app.has('url') && app.url !== '') {
       window.location = app.url;
     }
     else {
