@@ -38,7 +38,7 @@ class Tile extends React.Component {
         marginBottom: size / 8,
       },
       tileName: {
-        width: size,
+        width: size - 8,
         height: '2.1em',
         lineHeight: '1em',
         fontSize: 14,
