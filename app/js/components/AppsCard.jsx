@@ -8,7 +8,11 @@ const Tile = require('@components/Tile');
 
 
 function AppsCard(props) {
-  const tiles = props.model.favoriteApps && props.model.favoriteApps
+  if (!props.model.favoriteApps || !props.model.apps) {
+    return null;
+  }
+
+  const tiles = props.model.favoriteApps
   .map((value, key) => {
     return <Tile key={key}
       app={props.model.apps.find(app => app.id === value)}

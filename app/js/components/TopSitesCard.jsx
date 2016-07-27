@@ -5,7 +5,11 @@ const Tile = require('@components/Tile');
 
 
 function TopSitesCard(props) {
-  const tiles = props.model.topSites && props.model.topSites
+  if (!props.model.topSites) {
+    return null;
+  }
+
+  const tiles = props.model.topSites
   .map((value, key) => {
     return <Tile key={key}
       app={value}
