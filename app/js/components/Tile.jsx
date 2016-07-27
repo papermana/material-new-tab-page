@@ -49,6 +49,13 @@ class Tile extends React.Component {
       },
     };
 
+    if (this.props.smallIcons) {
+      styles.tileImg.width = 16;
+      styles.tileImg.height = 16;
+      styles.tileImg.margin = (size - 16) / 2;
+      styles.tileImg.marginBottom = (size * 0.875) - 16 - ((size - 16) / 2);
+    }
+
 
     return <FlatButton style={styles.tile}
       onClick={() => this.clickFunc(this.props.app)} >
@@ -71,6 +78,7 @@ Tile.propTypes = {
       'large',
     ]),
   ]).isRequired,
+  smallIcons: React.PropTypes.bool,
 };
 
 
