@@ -33,7 +33,8 @@ function Content(props) {
     const Card = cardsTemplate[value];
 
     return <Card key={key}
-      model={props.model} />;
+      model={props.model}
+      size={props.dimensions.width < consts.breakpoints.medium ? 'small' : 'medium'} />;
   });
 
   return <div style={styles.wrapper} >
@@ -50,7 +51,7 @@ Content.propTypes = {
 
 const styles = {
   main: {
-    height: 500,
+    // height: 500,
     margin: 'auto',
     backgroundColor: 'red',
     overflow: 'auto',

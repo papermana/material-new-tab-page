@@ -9,10 +9,19 @@ const Tile = require('@components/Tile');
 
 
 function AppsCard(props) {
+  const size = props.size === 'small' ? 96 : 128;
   const tiles = props.model.favoriteApps && props.model.favoriteApps
   .map((value, key) => {
-    return <Tile key={key} app={props.model.apps.find(app => app.id === value)} />;
+    return <Tile key={key} app={props.model.apps.find(app => app.id === value)} size={size} />;
   });
+  const styles = {
+    card: {
+      display: 'flex',
+      width: size * 4,
+      flexWrap: 'wrap',
+      margin: 16,
+    },
+  };
 
   return <Card style={styles.card} >
     <div>
@@ -26,13 +35,10 @@ function AppsCard(props) {
 
 AppsCard.propTypes = {
   model: consts.propTypes.MODEL.isRequired,
-};
-
-const styles = {
-  card: {
-    width: 'calc(50% - 32px)',
-    margin: '16px',
-  },
+  size: React.PropTypes.oneOf([
+    'small',
+    'medium',
+  ]).isRequired,
 };
 
 

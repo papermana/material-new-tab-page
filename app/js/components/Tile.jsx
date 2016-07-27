@@ -16,6 +16,40 @@ class Tile extends React.Component {
   }
 
   render() {
+    const size = this.props.size === 'large' ? 256
+      : this.props.size === 'medium' ? 128
+      : this.props.size === 'small' ? 96
+      : this.props.size;
+    const styles = {
+      tile: {
+        display: 'inline-flex',
+        width: size,
+        height: 'auto',
+        flexDirection: 'column',
+        alignItems: 'center',
+        overflow: 'hidden',
+        //  Overwrite FlatButton's default styling, because it causes some issues:
+        lineHeight: '1em',
+      },
+      tileImg: {
+        width: size / 2,
+        height: size / 2,
+        margin: size / 4,
+        marginBottom: size / 8,
+      },
+      tileName: {
+        width: size,
+        height: '2.1em',
+        lineHeight: '1em',
+        fontSize: 14,
+        margin: 4,
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        textAlign: 'center',
+      },
+    };
+
+
     return <FlatButton style={styles.tile}
       onClick={() => this.clickFunc(this.props.app)} >
       <img style={styles.tileImg}
@@ -29,32 +63,14 @@ class Tile extends React.Component {
 
 Tile.propTypes = {
   app: consts.propTypes.TILE.isRequired,
-};
-
-const styles = {
-  tile: {
-    display: 'inline-flex',
-    width: 1 / 4 * 100 + '%',
-    height: 'auto',
-    flexDirection: 'column',
-    alignItems: 'center',
-    overflow: 'auto',
-  },
-  tileImg: {
-    width: 64,
-    height: 64,
-    margin: '16px 0',
-  },
-  tileName: {
-    width: '90%',
-    height: '2.1em',
-    lineHeight: '1em',
-    fontSize: 14,
-    margin: 0,
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    textAlign: 'center',
-  },
+  size: React.PropTypes.oneOfType([
+    React.PropTypes.number,
+    React.PropTypes.oneOf([
+      'small',
+      'medium',
+      'large',
+    ]),
+  ]).isRequired,
 };
 
 
