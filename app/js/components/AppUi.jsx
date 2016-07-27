@@ -3,6 +3,7 @@ const reactCss = require('reactcss').default;
 const {
   MuiThemeProvider,
 } = require('material-ui');
+const materialColors = require('material-ui/styles/colors');
 const consts = require('@js/constants');
 const Header = require('@components/Header');
 const Dialogs = require('@components/Dialogs');
@@ -40,7 +41,7 @@ class AppUi extends React.Component {
 
   render() {
     return <MuiThemeProvider>
-      <div>
+      <div style={styles.wrapper} >
         <Header />
         <Dialogs model={this.props.model} />
         <Content model={this.props.model} dimensions={this.state.dimensions} />
@@ -53,13 +54,12 @@ AppUi.propTypes = {
   model: consts.propTypes.MODEL.isRequired,
 };
 
-const styles = reactCss({
-  default: {
-    text: {
-      backgroundColor: 'white',
-    },
+const styles = {
+  wrapper: {
+    minHeight: '100vh',
+    backgroundColor: materialColors.grey200,
   },
-});
+};
 
 
 module.exports = AppUi;
