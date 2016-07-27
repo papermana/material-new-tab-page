@@ -10,18 +10,21 @@ const cardsTemplate = {
 };
 
 function Content(props) {
-  const customStyles = {
-    main: {},
+  const styles = {
+    main: {
+      display: 'flex',
+      margin: 'auto',
+      flexWrap: 'wrap',
+      flexDirection: 'row',
+      justifyContent: 'center',
+    },
   };
 
-  if (props.dimensions.width < consts.breakpoints.small) {
-    customStyles.main.width = '100%';
-  }
-  else if (props.dimensions.width < consts.breakpoints.medium) {
-    customStyles.main.width = 10 / 12 * 100 + '%';
+  if (props.dimensions.width < consts.breakpoints.medium) {
+    styles.main.width = '100%';
   }
   else {
-    customStyles.main.width = 8 / 12 * 100 + '%';
+    styles.main.width = 10 / 12 * 100 + '%';
   }
 
   const features = props.model.config && props.model.config.features;
@@ -38,7 +41,7 @@ function Content(props) {
   });
 
   return <div style={styles.wrapper} >
-     <div style={Object.assign({}, styles.main, customStyles.main)} >
+     <div style={styles.main} >
        {cards}
      </div>
    </div>;
@@ -47,15 +50,6 @@ function Content(props) {
 Content.propTypes = {
   model: consts.propTypes.MODEL.isRequired,
   dimensions: consts.propTypes.DIMENSIONS.isRequired,
-};
-
-const styles = {
-  main: {
-    // height: 500,
-    margin: 'auto',
-    backgroundColor: 'red',
-    overflow: 'auto',
-  },
 };
 
 
