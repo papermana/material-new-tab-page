@@ -51,7 +51,7 @@ const AppContainer = React.createClass({
         config: isStoreReady(ConfigStore),
         apps: isStoreReady(AppsStore, 'apps'),
         favoriteApps: isStoreReady(AppsStore, 'favoriteApps'),
-        topSites: isStoreReady(TopSitesStore),
+        topSites: isStoreReady(TopSitesStore, 'sites'),
         weather: isStoreReady(WeatherStore),
       };
     },
