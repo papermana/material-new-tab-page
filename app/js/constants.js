@@ -5,6 +5,7 @@ const Immutable = require('immutable');
 const constants = {};
 
 constants.HEADER_HEIGHT = 4 * 64;
+constants.SEARCHBAR_HEIGHT = 56;
 
 constants.propTypes = {
   MODEL: React.PropTypes.shape({
@@ -23,6 +24,10 @@ constants.propTypes = {
   CHILDREN: React.PropTypes.oneOfType([
     React.PropTypes.arrayOf(React.PropTypes.node),
     React.PropTypes.node,
+  ]),
+  STYLE: React.PropTypes.oneOfType([
+    React.PropTypes.object,
+    React.PropTypes.arrayOf(React.PropTypes.object),
   ]),
 };
 

@@ -1,5 +1,4 @@
 const React = require('react');
-const reactCss = require('reactcss').default;
 const {
   AppBar,
   IconButton,
@@ -25,6 +24,11 @@ function Menu(props) {
   const button = <IconButton>
     <NavigationMoreVert />
   </IconButton>;
+  const styles = {
+    menuItem: {
+      cursor: 'pointer',
+    },
+  };
 
   return <IconMenu
     iconButtonElement={button}
@@ -55,27 +59,25 @@ function Header(props) {
     wrapper: {
       height: consts.HEADER_HEIGHT,
       backgroundColor: HEADER_COLOR,
+      position: 'relative',
+    },
+    searchBar: {
+      position: 'absolute',
+      bottom: 64 - consts.SEARCHBAR_HEIGHT,
+      width: '100%',
     },
   };
 
   return <Paper style={styles.wrapper}
     rounded={false} >
     <Bar />
-    <SearchBar model={props.model} />
+    <SearchBar model={props.model} style={styles.searchBar} />
   </Paper>;
 }
 
 Header.propTypes = {
   model: consts.propTypes.MODEL.isRequired,
 };
-
-const styles = reactCss({
-  default: {
-    menuItem: {
-      cursor: 'pointer',
-    },
-  },
-});
 
 
 module.exports = Header;

@@ -80,41 +80,45 @@ class SearchBar extends React.Component {
       ),
     }));
 
-    return <Paper style={styles.wrapper} >
-      <ActionSearch style={styles.searchIcon} />
-      <AutoComplete
-        inputStyle={styles.searchInput}
-        hintStyle={styles.searchHint}
-        dataSource={source}
-        searchText={this.state.input}
-        hintText="Type in to search"
-        openOnFocus
-        fullWidth
-        underlineShow={false}
-        filter={() => true}
-        onUpdateInput={this.inputFunc.bind(this)}
-        onNewRequest={(req, i) => this.clickFunc(i)} />
-      {
-        this.state.input !== '' &&
-        <IconButton style={styles.closeIcon}
-          onClick={this.clearInputFunc.bind(this)} >
-          <NavigationClose />
-        </IconButton>
-      }
-    </Paper>;
+    return <div style={this.props.style} >
+      <Paper style={styles.paper} >
+        <ActionSearch style={styles.searchIcon} />
+        <AutoComplete
+          inputStyle={styles.searchInput}
+          hintStyle={styles.searchHint}
+          dataSource={source}
+          searchText={this.state.input}
+          hintText="Type in to search"
+          openOnFocus
+          fullWidth
+          underlineShow={false}
+          filter={() => true}
+          onUpdateInput={this.inputFunc.bind(this)}
+          onNewRequest={(req, i) => this.clickFunc(i)} />
+        {
+          this.state.input !== '' &&
+          <IconButton style={styles.closeIcon}
+            onClick={this.clearInputFunc.bind(this)} >
+            <NavigationClose />
+          </IconButton>
+        }
+      </Paper>
+    </div>;
   }
 }
 
 SearchBar.propTypes = {
   model: consts.propTypes.MODEL.isRequired,
+  style: consts.propTypes.STYLE,
 };
 
 const styles = {
-  wrapper: {
+  paper: {
     position: 'relative',
     display: 'flex',
     width: (6 / 12 * 100) + 'vw',
-    minWidth: 385,
+    minWidth: 600,
+    maxWidth: '90%',
     margin: 'auto',
     padding: '4px 0',
   },
