@@ -150,6 +150,21 @@ describe('`StateStore.utils.js` - A set of utility functions for the `StateStore
       expect(results[1]).toEqual({id: 1, name: 'test-true'});
     });
 
+    it('should be case insensitive', () => {
+      mockAppsStore([
+        {id: 1, name: 'test'},
+        {id: 2, name: 'Test'},
+      ]);
+
+      runTestWith('test');
+
+      const results = getResults();
+
+      expect(results.length).toBe(3);
+      expect(results[1]).toEqual({id: 1, name: 'test'});
+      expect(results[2]).toEqual({id: 2, name: 'Test'});
+    });
+
     it('should not include results from `AppsStore` and `TopSitesStore` if permissions are not granted for them', () => {
       mockConfigStore({
         apps: false,
