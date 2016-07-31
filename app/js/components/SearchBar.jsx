@@ -84,8 +84,10 @@ class SearchBar extends React.Component {
       <ActionSearch style={styles.searchIcon} />
       <AutoComplete
         inputStyle={styles.searchInput}
+        hintStyle={styles.searchHint}
         dataSource={source}
         searchText={this.state.input}
+        hintText="Type in to search"
         openOnFocus
         fullWidth
         underlineShow={false}
@@ -121,6 +123,9 @@ const styles = {
     width: 'calc(100% - 48px - 48px)',
     paddingLeft: 48,
     paddingRight: 48,
+  },
+  searchHint: {
+    paddingLeft: 48,
   },
   searchIcon: {
     position: 'absolute',
