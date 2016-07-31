@@ -85,6 +85,7 @@ class SearchBar extends React.Component {
         openOnFocus
         fullWidth
         underlineShow={false}
+        filter={() => true}
         onUpdateInput={this.inputFunc.bind(this)}
         onNewRequest={(req, i) => this.clickFunc(i)} />
       {
