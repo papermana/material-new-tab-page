@@ -5,7 +5,7 @@ const Immutable = require('immutable');
 const constants = {};
 
 constants.HEADER_HEIGHT = 4 * 64;
-constants.SEARCHBAR_HEIGHT = 56;
+constants.SEARCHBAR_HEIGHT = 52;
 
 constants.propTypes = {
   MODEL: React.PropTypes.shape({
