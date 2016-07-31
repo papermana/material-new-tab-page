@@ -42,7 +42,7 @@ class AppUi extends React.Component {
   render() {
     return <MuiThemeProvider>
       <div style={styles.wrapper} >
-        <Header />
+        <Header model={this.props.model} />
         <Dialogs model={this.props.model} />
         <Content model={this.props.model} dimensions={this.state.dimensions} />
       </div>

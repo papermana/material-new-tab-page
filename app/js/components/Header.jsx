@@ -61,9 +61,13 @@ function Header(props) {
   return <Paper style={styles.wrapper}
     rounded={false} >
     <Bar />
-    <SearchBar />
+    <SearchBar model={props.model} />
   </Paper>;
 }
+
+Header.propTypes = {
+  model: consts.propTypes.MODEL.isRequired,
+};
 
 const styles = reactCss({
   default: {

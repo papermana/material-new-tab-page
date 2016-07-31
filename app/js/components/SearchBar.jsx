@@ -2,6 +2,7 @@ const React = require('react');
 const {
   AutoComplete,
   IconButton,
+  MenuItem,
   Paper,
 } = require('material-ui');
 const {
@@ -25,6 +26,8 @@ class SearchBar extends React.Component {
     this.setState({
       input: text,
     });
+
+    actionCreators.setSearchValue(text);
   }
 
   clearInputFunc() {
@@ -33,19 +36,43 @@ class SearchBar extends React.Component {
     });
   }
 
+  clickFunc(i) {
+    //  if enter gets pressed (i === -1), then open search result:
+    i = i < 0 ? 0 : i;
+
+    const app = this.props.model.state.searchResults.get(i);
+
+    if (app.has('url') && app.url !== '') {
+      window.location = app.url;
+    }
+    else {
+      chrome.management.launchApp(app.id);
+    }
+  }
+
   render() {
-    const source = ['foo', 'bar'];
+    const source = this.props.model.state.searchResults
+    .toArray()
+    .map(item => ({
+      text: item.name,
+      value: (
+        <MenuItem primaryText={item.name}
+          innerDivStyle={styles.result}
+          children={<img src={item.icon} style={styles.resultIcon} />} />
+      ),
+    }));
 
     return <Paper style={styles.wrapper} >
       <ActionSearch style={styles.searchIcon} />
-      <AutoComplete style={styles.searchField}
+      <AutoComplete
         inputStyle={styles.searchInput}
         dataSource={source}
         searchText={this.state.input}
         openOnFocus
         fullWidth
         underlineShow={false}
-        onUpdateInput={this.inputFunc.bind(this)} />
+        onUpdateInput={this.inputFunc.bind(this)}
+        onNewRequest={(req, i) => this.clickFunc(i)} />
       {
         this.state.input !== '' &&
         <IconButton style={styles.closeIcon}
@@ -57,6 +84,10 @@ class SearchBar extends React.Component {
   }
 }
 
+SearchBar.propTypes = {
+  model: consts.propTypes.MODEL.isRequired,
+};
+
 const styles = {
   wrapper: {
     position: 'relative',
@@ -65,8 +96,6 @@ const styles = {
     minWidth: 385,
     margin: 'auto',
     padding: '4px 0',
-  },
-  searchField: {
   },
   searchInput: {
     fontSize: 18,
@@ -83,6 +112,19 @@ const styles = {
     position: 'absolute',
     top: 4,
     right: 4,
+  },
+  result: {
+    display: 'flex',
+    //  Subtract width of the icon:
+    width: 'calc(100% - 48px)',
+    overflow: 'hidden',
+    cursor: 'pointer',
+  },
+  resultIcon: {
+    width: 16,
+    height: 16,
+    padding: 16,
+    paddingLeft: 0,
   },
 };
 
