@@ -10,14 +10,17 @@ function MyCard(props) {
   const styles = {
     card: {
       display: 'flex',
-      width: size * 4,
+      width: size * 4 + 16,
       flexWrap: 'wrap',
       margin: 16,
+    },
+    cardContent: {
+      padding: 8,
     },
   };
 
   return <Card style={styles.card} >
-    <div>
+    <div style={styles.cardContent} >
       {props.tiles}
     </div>
     {
