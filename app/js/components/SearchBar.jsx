@@ -117,8 +117,8 @@ const styles = {
     position: 'relative',
     display: 'flex',
     width: (6 / 12 * 100) + 'vw',
-    minWidth: 600,
-    maxWidth: '90%',
+    //  There is also max-width set on the wrapper of this element, in Header.jsx:
+    maxWidth: '100%',
     margin: 'auto',
     padding: '2px 0',
   },

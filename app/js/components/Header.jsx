@@ -119,6 +119,8 @@ class Header extends React.Component {
       },
       searchBar: {
         paddingBottom: (64 - consts.SEARCHBAR_HEIGHT) / 2,
+        //  Full width sans icons on the left and right of the app bar:
+        maxWidth: 'calc(100% - 64px - 64px)',
         zIndex: 120,
       },
     };
