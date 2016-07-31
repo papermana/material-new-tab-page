@@ -43,7 +43,21 @@ class SearchBar extends React.Component {
     const app = this.props.model.state.searchResults.get(i);
 
     if (app.has('url') && app.url !== '') {
-      window.location = app.url;
+      //  Workaround for the fact that you can't normally open pages using
+      //  the `chrome://` protocol from a non-chrome-internal page.
+      //  We use `chrome.tabs.create` to create a new tab (doesn't actually
+      //  require any permissions); otherwise we simply open the new page
+      //  in the same tab as normal:
+      if (app.url.includes('chrome://')) {
+        chrome.tabs.getCurrent(tab => {
+          chrome.tabs.create({url: app.url}, () => {
+            chrome.tabs.remove(tab.id);
+          });
+        });
+      }
+      else {
+        window.location = app.url;
+      }
     }
     else {
       chrome.management.launchApp(app.id);
