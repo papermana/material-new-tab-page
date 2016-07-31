@@ -58,6 +58,7 @@ class Tile extends React.Component {
 
 
     return <FlatButton style={styles.tile}
+      title={this.props.app.description}
       onClick={() => this.clickFunc(this.props.app)} >
       <img style={styles.tileImg}
         src={this.props.app.icon} />

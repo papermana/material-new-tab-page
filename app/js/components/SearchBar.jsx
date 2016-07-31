@@ -76,6 +76,7 @@ class SearchBar extends React.Component {
       value: (
         <MenuItem primaryText={item.name}
           innerDivStyle={styles.result}
+          title={item.description}
           children={<img src={item.icon} style={styles.resultIcon} />} />
       ),
     }));

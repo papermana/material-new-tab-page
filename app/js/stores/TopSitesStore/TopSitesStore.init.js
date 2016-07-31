@@ -12,7 +12,7 @@ function init() {
     return sites.map((site, index) => new TopSiteRecord({
       id: 't-s-' + index,
       name: site.title,
-      description: site.title,
+      description: site.url,
       url: site.url,
       icon: 'chrome://favicon/' + site.url,
     }));

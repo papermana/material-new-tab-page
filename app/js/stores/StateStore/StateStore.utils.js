@@ -111,7 +111,7 @@ const searchFunc = (function searchFuncFactory() {
         .map(bookmark => new SearchElement({
           id: 'b-' + bookmark.id,
           name: bookmark.title,
-          description: bookmark.title,
+          description: bookmark.url,
           url: bookmark.url,
           icon: 'chrome://favicon/' + bookmark.url,
         }))
