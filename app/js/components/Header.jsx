@@ -5,11 +5,17 @@ const {
   IconButton,
   IconMenu,
   MenuItem,
+  Paper,
 } = require('material-ui');
 const {
   NavigationMoreVert,
 } = require('material-ui/svg-icons');
+const materialColors = require('material-ui/styles/colors');
 const actionCreators = require('@js/actionCreators');
+const consts = require('@js/constants');
+const SearchBar = require('@components/SearchBar');
+
+const HEADER_COLOR = materialColors.blue500;
 
 function Menu(props) {
   const origin = {
@@ -31,10 +37,32 @@ function Menu(props) {
   </IconMenu>;
 }
 
-function Header(props) {
-  return <AppBar
+function Bar(props) {
+  const styles = {
+    bar: {
+      backgroundColor: HEADER_COLOR,
+    },
+  };
+
+  return <AppBar style={styles.bar}
+    zDepth={0}
     showMenuIconButton={false}
     iconElementRight={<Menu />} />;
+}
+
+function Header(props) {
+  const styles = {
+    wrapper: {
+      height: consts.HEADER_HEIGHT,
+      backgroundColor: HEADER_COLOR,
+    },
+  };
+
+  return <Paper style={styles.wrapper}
+    rounded={false} >
+    <Bar />
+    <SearchBar />
+  </Paper>;
 }
 
 const styles = reactCss({

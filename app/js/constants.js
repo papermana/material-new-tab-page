@@ -4,6 +4,8 @@ const Immutable = require('immutable');
 
 const constants = {};
 
+constants.HEADER_HEIGHT = 4 * 64;
+
 constants.propTypes = {
   MODEL: React.PropTypes.shape({
     state: React.PropTypes.instanceOf(Immutable.Record),
