@@ -127,7 +127,7 @@ class Header extends React.Component {
 
     return <Paper style={styles.wrapper}
       rounded={false}
-      zDepth={this.state.offset > 0 ? 2 : 0} >
+      zDepth={this.state.offset > 0 ? 2 : 1} >
       <Bar offset={this.state.offset} />
       <SearchBar model={this.props.model} style={styles.searchBar} />
     </Paper>;
