@@ -27,7 +27,11 @@ class SearchBar extends React.Component {
       input: text,
     });
 
-    actionCreators.setSearchValue(text);
+    setTimeout(() => {
+      if (text === this.state.input) {
+        actionCreators.setSearchValue(text);
+      }
+    }, 400);
   }
 
   clearInputFunc() {
