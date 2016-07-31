@@ -22,7 +22,7 @@ function Menu(props) {
     horizontal: 'right',
   };
   const button = <IconButton>
-    <NavigationMoreVert />
+    <NavigationMoreVert color="white" />
   </IconButton>;
   const styles = {
     menuItem: {
