@@ -11,6 +11,9 @@ const cardsTemplate = {
 
 function Content(props) {
   const styles = {
+    wrapper: {
+      paddingTop: consts.HEADER_HEIGHT,
+    },
     main: {
       display: 'flex',
       margin: 'auto',

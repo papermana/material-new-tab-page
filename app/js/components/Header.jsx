@@ -45,6 +45,9 @@ function Bar(props) {
   const styles = {
     bar: {
       backgroundColor: HEADER_COLOR,
+      transform: `translate3D(0, ${props.offset}px, 0)`,
+      transition: 'none',
+      zIndex: 110,
     },
   };
 
@@ -54,25 +57,79 @@ function Bar(props) {
     iconElementRight={<Menu />} />;
 }
 
-function Header(props) {
-  const styles = {
-    wrapper: {
-      height: consts.HEADER_HEIGHT,
-      backgroundColor: HEADER_COLOR,
-      position: 'relative',
-    },
-    searchBar: {
-      position: 'absolute',
-      bottom: 64 - consts.SEARCHBAR_HEIGHT,
-      width: '100%',
-    },
-  };
+Bar.propTypes = {
+  offset: React.PropTypes.number.isRequired,
+};
 
-  return <Paper style={styles.wrapper}
-    rounded={false} >
-    <Bar />
-    <SearchBar model={props.model} style={styles.searchBar} />
-  </Paper>;
+class Header extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      offset: 0,
+    };
+
+    this.scrollFuncBuffer;
+  }
+
+  componentWillMount() {
+    window.addEventListener('scroll', this.scrollFunc.bind(this));
+
+    this.scrollFunc();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.scrollFunc.bind(this));
+  }
+
+  scrollFunc() {
+    if (this.scrollFuncBuffer) {
+      window.cancelAnimationFrame(this.scrollFuncBuffer);
+    }
+
+    this.scrollFuncBuffer = window.requestAnimationFrame(this._scrollFuncInner.bind(this));
+  }
+
+  _scrollFuncInner() {
+    const offset = window.scrollY >= consts.HEADER_HEIGHT - 64
+      ? consts.HEADER_HEIGHT - 64
+      : window.scrollY;
+
+    if (offset !== this.state.offset) {
+      this.setState({
+        offset,
+      });
+    }
+  }
+
+  render() {
+    const styles = {
+      wrapper: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        height: consts.HEADER_HEIGHT,
+        backgroundColor: HEADER_COLOR,
+        position: 'fixed',
+        width: '100%',
+        transform: `translate3D(0, ${-this.state.offset}px, 0)`,
+        transition: 'none',
+        zIndex: 100,
+      },
+      searchBar: {
+        paddingBottom: (64 - consts.SEARCHBAR_HEIGHT) / 2,
+        zIndex: 120,
+      },
+    };
+
+    return <Paper style={styles.wrapper}
+      rounded={false}
+      zDepth={this.state.offset > 0 ? 2 : 0} >
+      <Bar offset={this.state.offset} />
+      <SearchBar model={this.props.model} style={styles.searchBar} />
+    </Paper>;
+  }
 }
 
 Header.propTypes = {
