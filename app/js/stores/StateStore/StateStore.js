@@ -1,6 +1,7 @@
 const {
   ReduceStore,
 } = require('flux/utils');
+const Immutable = require('immutable');
 const dispatcher = require('@js/dispatcher');
 const utils = require('@stores/StateStore/StateStore.utils');
 const {
@@ -29,7 +30,7 @@ class StateStore extends ReduceStore {
     }
     else if (action.type === 'setSearchResults') {
       return state
-      .set('searchResults', action.data);
+      .set('searchResults', Immutable.List(action.data));
     }
     else {
       return state;
