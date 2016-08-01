@@ -56,7 +56,8 @@ AppUi.propTypes = {
 
 const styles = {
   wrapper: {
-    minHeight: '100vh',
+    height: '100vh',
+    overflow: 'hidden',
     backgroundColor: materialColors.grey200,
   },
 };

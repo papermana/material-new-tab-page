@@ -72,14 +72,16 @@ class Header extends React.Component {
     this.scrollFuncBuffer;
   }
 
-  componentWillMount() {
-    window.addEventListener('scroll', this.scrollFunc.bind(this));
+  componentDidMount() {
+    this._mainWrapperElement = document.querySelector('#main-wrapper');
+
+    this._mainWrapperElement.addEventListener('scroll', this.scrollFunc.bind(this));
 
     this.scrollFunc();
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.scrollFunc.bind(this));
+    this._mainWrapperElement.removeEventListener('scroll', this.scrollFunc.bind(this));
   }
 
   scrollFunc() {
@@ -91,9 +93,9 @@ class Header extends React.Component {
   }
 
   _scrollFuncInner() {
-    const offset = window.scrollY >= consts.HEADER_HEIGHT - 64
+    const offset = this._mainWrapperElement.scrollTop >= consts.HEADER_HEIGHT - 64
       ? consts.HEADER_HEIGHT - 64
-      : window.scrollY;
+      : this._mainWrapperElement.scrollTop;
 
     if (offset !== this.state.offset) {
       this.setState({
