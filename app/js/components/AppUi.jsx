@@ -8,6 +8,7 @@ const consts = require('@js/constants');
 const Header = require('@components/Header');
 const Dialogs = require('@components/Dialogs');
 const Content = require('@components/Content');
+const AllApps = require('@components/AllApps');
 
 
 class AppUi extends React.Component {
@@ -45,6 +46,10 @@ class AppUi extends React.Component {
         <Header model={this.props.model} />
         <Dialogs model={this.props.model} />
         <Content model={this.props.model} dimensions={this.state.dimensions} />
+        {
+          this.props.model.state.navStack.peek() === 'allApps' &&
+          <AllApps model={this.props.model} dimensions={this.state.dimensions} />
+        }
       </div>
     </MuiThemeProvider>;
   }

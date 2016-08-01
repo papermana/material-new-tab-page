@@ -2,6 +2,7 @@ const React = require('react');
 const {
   FlatButton,
 } = require('material-ui');
+const actionCreators = require('@js/actionCreators');
 const consts = require('@js/constants');
 const MyCard = require('@components/MyCard');
 const Tile = require('@components/Tile');
@@ -20,7 +21,9 @@ function AppsCard(props) {
   })
   .toJS();
   const actions = [
-    <FlatButton key={0} label="All Apps" />,
+    <FlatButton key={0}
+      label="All Apps"
+      onClick={() => actionCreators.goTo('allApps')} />,
   ];
 
   return <MyCard tiles={tiles}
