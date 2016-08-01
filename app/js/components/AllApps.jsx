@@ -22,7 +22,7 @@ class AllApps extends React.Component {
 
     this._scrollFuncBuffer;
     this._rippleRadius = 0;
-    this._rippleScaleAnimDuration = 500;
+    this._rippleScaleAnimDuration = 400;
     this._rippleOpacityAnimDuration = 200;
   }
 
@@ -83,11 +83,13 @@ class AllApps extends React.Component {
     //  2 -- set `display` on non-ripple elements to `none`; go to stage 3 immediately,
     //  3 -- set `opacity` on the ripple to 0, after animation is finished go to stage 4,
     //  4 -- all animation finished, set `display` to `none` on the ripple.
+    //  In some cases we use a shorter delay than actual animation; this is to make
+    //  things feel snappier.
 
     const setAnimStage4 = this._setAnimStageFactory(4, () => {}, 0);
     const setAnimStage3 = this._setAnimStageFactory(3, setAnimStage4, this._rippleOpacityAnimDuration);
     const setAnimStage2 = this._setAnimStageFactory(2, setAnimStage3, 0);
-    const setAnimStage1 = this._setAnimStageFactory(1, setAnimStage2, this._rippleScaleAnimDuration);
+    const setAnimStage1 = this._setAnimStageFactory(1, setAnimStage2, this._rippleScaleAnimDuration / 1.8);
 
     setTimeout(setAnimStage1.bind(this), 0);
   }
@@ -107,7 +109,7 @@ class AllApps extends React.Component {
     };
     const setAnimStage8 = this._setAnimStageFactory(8, setAnimStage9, this._rippleScaleAnimDuration);
     const setAnimStage7 = this._setAnimStageFactory(7, setAnimStage8, 0);
-    const setAnimStage6 = this._setAnimStageFactory(6, setAnimStage7, this._rippleOpacityAnimDuration);
+    const setAnimStage6 = this._setAnimStageFactory(6, setAnimStage7, this._rippleOpacityAnimDuration / 2);
     const setAnimStage5 = this._setAnimStageFactory(5, setAnimStage6, 0);
 
     setTimeout(setAnimStage5.bind(this), 0);
