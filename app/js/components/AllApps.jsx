@@ -85,6 +85,8 @@ class AllApps extends React.Component {
     //  4 -- all animation finished, set `display` to `none` on the ripple.
     //  In some cases we use a shorter delay than actual animation; this is to make
     //  things feel snappier.
+    //  We're also using `opacity` and `pointer-events` combo instead of manipulating
+    //  `display`, for the same effect, but more stable.
 
     const setAnimStage4 = this._setAnimStageFactory(4, () => {}, 0);
     const setAnimStage3 = this._setAnimStageFactory(3, setAnimStage4, this._rippleOpacityAnimDuration);
@@ -143,14 +145,17 @@ class AllApps extends React.Component {
         zIndex: 200,
       },
       appBar: {
-        display: aStage >= 2 && aStage < 7 ? 'flex' : 'none',
         backgroundColor: 'white',
+        opacity: aStage >= 2 && aStage < 7 ? 1 : 0,
+        pointerEvents: aStage >= 2 && aStage < 7 ? 'auto' : 'none',
         zIndex: 10,
+        transition: 'none',
       },
       tilesDisplayWrapper: {
-        display: aStage >= 2 && aStage < 7 ? 'block' : 'none',
         height: 'calc(100vh - 64px)',
         backgroundColor: 'white',
+        opacity: aStage >= 2 && aStage < 7 ? 1 : 0,
+        pointerEvents: aStage >= 2 && aStage < 7 ? 'auto' : 'none',
         overflowY: 'scroll',
       },
       tilesDisplay: {
