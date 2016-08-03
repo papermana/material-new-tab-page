@@ -79,7 +79,41 @@ if (mode === 'dev') {
   config.devtool = 'cheap-module-source-map';
 }
 else if (mode === 'production') {
+  config.module.loaders = [
+    {
+      test: /\.(jsx|js)$/,
+      exclude: [/node_modules/, /__tests__/],
+      loader: 'babel-loader',
+      query: {
+        presets: ['react', 'es2015'],
+      },
+    },
+  ];
+
   config.plugins.push(...[
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        screw_ie8: true,
+        sequences: true,
+        properties: true,
+        dead_code: true,
+        drop_debugger: true,
+        conditionals: true,
+        comparisons: true,
+        evaluate: true,
+        booleans: true,
+        loops: true,
+        unused: true,
+        if_return: true,
+        join_vars: true,
+        cascade: true,
+        negate_iife: true,
+        pure_getters: true,
+        drop_console: true,
+        unsafe: true,
+        warnings: false,
+      },
+    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({
