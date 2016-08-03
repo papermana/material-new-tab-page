@@ -2,6 +2,7 @@ const React = require('react');
 const consts = require('@js/constants');
 const AppsCard = require('@components/AppsCard');
 const TopSitesCard = require('@components/TopSitesCard');
+const getScrollbarWidth = require('@utils/getScrollbarWidth');
 
 
 const cardsTemplate = {
@@ -9,45 +10,57 @@ const cardsTemplate = {
   topSites: TopSitesCard,
 };
 
-function Content(props) {
-  const styles = {
-    wrapper: {
-      paddingTop: consts.HEADER_HEIGHT,
-    },
-    main: {
-      display: 'flex',
-      margin: 'auto',
-      flexWrap: 'wrap',
-      flexDirection: 'row',
-      justifyContent: 'center',
-    },
-  };
-
-  if (props.dimensions.width < consts.breakpoints.medium) {
-    styles.main.width = '100%';
-  }
-  else {
-    styles.main.width = 10 / 12 * 100 + '%';
+class Content extends React.Component {
+  componentWillMount() {
+    this._scrollbarWidth = getScrollbarWidth();
   }
 
-  const features = props.model.config && props.model.config.features;
-  let cards = features && features
-  .toMap()
-  .filter((value, key) => value && cardsTemplate[key])
-  .keySeq()
-  .map((value, key) => {
-    const Card = cardsTemplate[value];
+  render() {
+    const styles = {
+      wrapper: {
+        height: `calc(100vh - ${consts.HEADER_HEIGHT}px)`,
+        marginTop: 64,
+        paddingTop: consts.HEADER_HEIGHT - 64,
+        overflowY: 'scroll',
+        overflowX: 'hidden',
+      },
+      main: {
+        position: 'relative',
+        left: this._scrollbarWidth / 2,
+        display: 'flex',
+        margin: 'auto',
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+        justifyContent: 'center',
+      },
+    };
 
-    return <Card key={key}
-      model={props.model}
-      size={props.dimensions.width < consts.breakpoints.medium ? 'small' : 'medium'} />;
-  });
+    if (this.props.dimensions.width < consts.breakpoints.medium) {
+      styles.main.width = '100%';
+    }
+    else {
+      styles.main.width = 10 / 12 * 100 + '%';
+    }
 
-  return <div style={styles.wrapper} >
-     <div style={styles.main} >
-       {cards}
-     </div>
-   </div>;
+    const features = this.props.model.config && this.props.model.config.features;
+    let cards = features && features
+    .toMap()
+    .filter((value, key) => value && cardsTemplate[key])
+    .keySeq()
+    .map((value, key) => {
+      const Card = cardsTemplate[value];
+
+      return <Card key={key}
+        model={this.props.model}
+        size={this.props.dimensions.width < consts.breakpoints.medium ? 'small' : 'medium'} />;
+    });
+
+    return <div id="main-wrapper" style={styles.wrapper} >
+       <div style={styles.main} >
+         {cards}
+       </div>
+     </div>;
+  }
 }
 
 Content.propTypes = {
