@@ -275,7 +275,7 @@ describe('`StateStore.utils.js` - A set of utility functions for the `StateStore
         expect(secondCallResults[2].toJS()).toEqual({
           id: 'b-1',
           name: 'test',
-          description: 'test',
+          description: 'test-url',
           url: 'test-url',
           icon: 'chrome://favicon/test-url',
         });
@@ -337,7 +337,7 @@ describe('`StateStore.utils.js` - A set of utility functions for the `StateStore
         expect(results[2].toJS()).toEqual({
           id: 'b-3',
           name: 'test',
-          description: 'test',
+          description: 'different-url',
           url: 'different-url',
           icon: 'chrome://favicon/different-url',
         });
@@ -360,7 +360,7 @@ describe('`StateStore.utils.js` - A set of utility functions for the `StateStore
         expect(results[1].toJS()).toEqual({
           id: 'b-1',
           name: 'test',
-          description: 'test',
+          description: 'test-url',
           url: 'test-url',
           icon: 'chrome://favicon/test-url',
         });
