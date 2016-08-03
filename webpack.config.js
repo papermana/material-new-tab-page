@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 const webpack = require('webpack');
 const Copy = require('copy-webpack-plugin');
 
