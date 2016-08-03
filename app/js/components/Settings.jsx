@@ -99,6 +99,7 @@ class Settings extends React.Component {
     return <Dialog open={true}
       title="Settings"
       actions={buttons}
+      autoScrollBodyContent
       onRequestClose={this.exit.bind(this)} >
       <h2>Enable features:</h2>
       <p>Some of the features may request additional permissions.</p>
