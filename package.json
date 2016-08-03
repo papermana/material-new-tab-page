@@ -29,7 +29,7 @@
     "eslint-plugin-jasmine": "^1.8.1",
     "eslint-plugin-react": "^5.2.2",
     "jest-alias-preprocessor": "^1.0.2",
-    "jest-cli": "^13.2.3",
+    "jest-cli": "^14.1.0",
     "react-addons-test-utils": "^15.2.1",
     "webpack": "^1.13.1"
   },
