@@ -1,8 +1,6 @@
 const React = require('react');
-const {
-  Card,
-  CardActions,
-} = require('material-ui');
+const Card = require('material-ui/Card').default;
+const CardActions = require('material-ui/Card/CardActions').default;
 
 
 function MyCard(props) {

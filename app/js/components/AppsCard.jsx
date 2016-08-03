@@ -1,7 +1,5 @@
 const React = require('react');
-const {
-  FlatButton,
-} = require('material-ui');
+const FlatButton = require('material-ui/FlatButton').default;
 const actionCreators = require('@js/actionCreators');
 const consts = require('@js/constants');
 const MyCard = require('@components/MyCard');

@@ -1,12 +1,10 @@
 const React = require('react');
 const Immutable = require('immutable');
-const {
-  Checkbox,
-  Dialog,
-  FlatButton,
-  RadioButton,
-  RadioButtonGroup,
-} = require('material-ui');
+const Checkbox = require('material-ui/Checkbox').default;
+const Dialog = require('material-ui/Dialog').default;
+const FlatButton = require('material-ui/FlatButton').default;
+const RadioButton = require('material-ui/RadioButton').default;
+const RadioButtonGroup = require('material-ui/RadioButton/RadioButtonGroup').default;
 const actionCreators = require('@js/actionCreators');
 const consts = require('@js/constants');
 

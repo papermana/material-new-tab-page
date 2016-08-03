@@ -1,10 +1,8 @@
 const React = require('react');
-const {
-  AutoComplete,
-  IconButton,
-  MenuItem,
-  Paper,
-} = require('material-ui');
+const AutoComplete = require('material-ui/AutoComplete').default;
+const IconButton = require('material-ui/IconButton').default;
+const MenuItem = require('material-ui/MenuItem').default;
+const Paper = require('material-ui/Paper').default;
 const {
   ActionSearch,
   NavigationClose,

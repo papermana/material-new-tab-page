@@ -1,11 +1,9 @@
 const React = require('react');
-const {
-  AppBar,
-  IconButton,
-  IconMenu,
-  MenuItem,
-  Paper,
-} = require('material-ui');
+const AppBar = require('material-ui/AppBar').default;
+const IconButton = require('material-ui/IconButton').default;
+const IconMenu = require('material-ui/IconMenu').default;
+const MenuItem = require('material-ui/MenuItem').default;
+const Paper = require('material-ui/Paper').default;
 const {
   NavigationMoreVert,
 } = require('material-ui/svg-icons');

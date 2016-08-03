@@ -1,7 +1,5 @@
 const React = require('react');
-const {
-  MuiThemeProvider,
-} = require('material-ui');
+const MuiThemeProvider = require('material-ui/styles/MuiThemeProvider').default;
 const materialColors = require('material-ui/styles/colors');
 const consts = require('@js/constants');
 const Header = require('@components/Header');
