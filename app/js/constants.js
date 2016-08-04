@@ -16,10 +16,7 @@ constants.propTypes = {
     topSites: React.PropTypes.instanceOf(Immutable.List),
     weather: React.PropTypes.instanceOf(Immutable.Record),
   }),
-  DIMENSIONS: React.PropTypes.shape({
-    width: React.PropTypes.number.isRequired,
-    height: React.PropTypes.number.isRequired,
-  }),
+  DIMENSIONS: React.PropTypes.instanceOf(Immutable.Record),
   TILE: React.PropTypes.instanceOf(Immutable.Record),
   CHILDREN: React.PropTypes.oneOfType([
     React.PropTypes.arrayOf(React.PropTypes.node),

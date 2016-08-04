@@ -1,4 +1,5 @@
 const React = require('react');
+const Immutable = require('immutable');
 const MuiThemeProvider = require('material-ui/styles/MuiThemeProvider').default;
 const materialColors = require('material-ui/styles/colors');
 const consts = require('@js/constants');
@@ -8,15 +9,26 @@ const Content = require('@components/Content');
 const AllApps = require('@components/AllApps');
 
 
+const getDimensions = (function getDimensionsFactory() {
+  const Dimensions = Immutable.Record({
+    width: 0,
+    height: 0,
+  });
+
+  return function getDimensions() {
+    return new Dimensions({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  };
+})();
+
 class AppUi extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      dimensions: {
-        width: window.innerWidth,
-        height: window.innerHeight,
-      },
+      dimensions: getDimensions(),
     };
   }
 
@@ -30,10 +42,7 @@ class AppUi extends React.PureComponent {
 
   resizeFunc() {
     this.setState({
-      dimensions: {
-        width: window.innerWidth,
-        height: window.innerHeight,
-      },
+      dimensions: getDimensions(),
     });
   }
 
