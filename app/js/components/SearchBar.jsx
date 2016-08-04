@@ -3,10 +3,8 @@ const AutoComplete = require('material-ui/AutoComplete').default;
 const IconButton = require('material-ui/IconButton').default;
 const MenuItem = require('material-ui/MenuItem').default;
 const Paper = require('material-ui/Paper').default;
-const {
-  ActionSearch,
-  NavigationClose,
-} = require('material-ui/svg-icons');
+const ActionSearch = require('material-ui/svg-icons/action/search').default;
+const NavigationClose = require('material-ui/svg-icons/navigation/close').default;
 const actionCreators = require('@js/actionCreators');
 const consts = require('@js/constants');
 

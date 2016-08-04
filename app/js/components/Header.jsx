@@ -4,9 +4,7 @@ const IconButton = require('material-ui/IconButton').default;
 const IconMenu = require('material-ui/IconMenu').default;
 const MenuItem = require('material-ui/MenuItem').default;
 const Paper = require('material-ui/Paper').default;
-const {
-  NavigationMoreVert,
-} = require('material-ui/svg-icons');
+const NavigationMoreVert = require('material-ui/svg-icons/navigation/more-vert').default;
 const materialColors = require('material-ui/styles/colors');
 const actionCreators = require('@js/actionCreators');
 const consts = require('@js/constants');

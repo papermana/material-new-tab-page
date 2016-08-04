@@ -2,9 +2,7 @@ const React = require('react');
 const consts = require('@js/constants');
 const AppBar = require('material-ui/AppBar').default;
 const IconButton = require('material-ui/IconButton').default;
-const {
-  NavigationArrowBack,
-} = require('material-ui/svg-icons');
+const NavigationArrowBack = require('material-ui/svg-icons/navigation/arrow-back').default;
 const actionCreators = require('@js/actionCreators');
 const Tile = require('@components/Tile');
 
