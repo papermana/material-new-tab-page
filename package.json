@@ -9,7 +9,8 @@
     "clean-directory": "if [ -d 'dist' ]; then rm -r ./dist; fi",
     "lint": "eslint \"./app/js/**/*.+(js|jsx)\"",
     "start": "npm run clean-directory; webpack",
-    "build": "npm run clean-directory; npm run lint; webpack --mode=production"
+    "build": "npm run clean-directory; npm run lint; webpack --mode=production",
+    "analyze-size": "webpack --mode=production --json | webpack-bundle-size-analyzer"
   },
   "dependencies": {
     "flux": "^2.1.1",
@@ -31,7 +32,8 @@
     "jest-alias-preprocessor": "^1.0.2",
     "jest-cli": "^14.1.0",
     "react-addons-test-utils": "^15.2.1",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.1",
+    "webpack-bundle-size-analyzer": "^2.0.2"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/jestPreprocessor.js",
