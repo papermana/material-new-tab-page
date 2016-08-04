@@ -7,7 +7,7 @@ const actionCreators = require('@js/actionCreators');
 const Tile = require('@components/Tile');
 
 
-class AllApps extends React.Component {
+class AllApps extends React.PureComponent {
   constructor(props) {
     super(props);
 

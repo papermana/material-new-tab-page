@@ -8,7 +8,7 @@ const Content = require('@components/Content');
 const AllApps = require('@components/AllApps');
 
 
-class AppUi extends React.Component {
+class AppUi extends React.PureComponent {
   constructor(props) {
     super(props);
 

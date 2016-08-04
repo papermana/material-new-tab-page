@@ -57,7 +57,7 @@ Bar.propTypes = {
   offset: React.PropTypes.number.isRequired,
 };
 
-class Header extends React.Component {
+class Header extends React.PureComponent {
   constructor(props) {
     super(props);
 

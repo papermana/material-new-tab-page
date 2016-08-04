@@ -9,7 +9,7 @@ const actionCreators = require('@js/actionCreators');
 const consts = require('@js/constants');
 
 
-class Settings extends React.Component {
+class Settings extends React.PureComponent {
   constructor(props) {
     super(props);
 

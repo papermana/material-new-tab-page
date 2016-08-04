@@ -10,7 +10,7 @@ const cardsTemplate = {
   topSites: TopSitesCard,
 };
 
-class Content extends React.Component {
+class Content extends React.PureComponent {
   componentWillMount() {
     this._scrollbarWidth = getScrollbarWidth();
   }
