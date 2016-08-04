@@ -3,7 +3,7 @@ const ReactDom = require('react-dom');
 const injectTapEventPlugin = require('react-tap-event-plugin');
 const App = require('@components/App');
 
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
   //  Required by Material-UI:
   injectTapEventPlugin();
 
