@@ -60,7 +60,7 @@ describe('`TopSitesStore.init.js` - Function that initializes `TopSitesStore`', 
         new TopSiteRecord({
           id: 't-s-0',
           name: 'test',
-          description: 'test',
+          description: 'testUrl',
           url: 'testUrl',
           icon: 'chrome://favicon/testUrl',
         }),

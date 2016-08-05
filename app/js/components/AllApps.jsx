@@ -1,17 +1,13 @@
 const React = require('react');
 const consts = require('@js/constants');
-const {
-  AppBar,
-  IconButton,
-} = require('material-ui');
-const {
-  NavigationArrowBack,
-} = require('material-ui/svg-icons');
+const AppBar = require('material-ui/AppBar').default;
+const IconButton = require('material-ui/IconButton').default;
+const NavigationArrowBack = require('material-ui/svg-icons/navigation/arrow-back').default;
 const actionCreators = require('@js/actionCreators');
 const Tile = require('@components/Tile');
 
 
-class AllApps extends React.Component {
+class AllApps extends React.PureComponent {
   constructor(props) {
     super(props);
 

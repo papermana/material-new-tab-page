@@ -6,8 +6,11 @@
   "licence": "",
   "scripts": {
     "test": "jest",
-    "start": "if [ -d 'dist' ]; then rm -r ./dist; fi; ./node_modules/webpack/bin/webpack.js",
-    "build": "if [ -d 'dist' ]; then rm -r ./dist; fi; ./node_modules/webpack/bin/webpack.js --mode=production"
+    "clean-directory": "if [ -d 'dist' ]; then rm -r ./dist; fi",
+    "lint": "eslint \"./app/js/**/*.+(js|jsx)\"",
+    "start": "npm run clean-directory; webpack",
+    "build": "npm run clean-directory; npm run lint; webpack --mode=production",
+    "analyze-size": "webpack --mode=production --json | webpack-bundle-size-analyzer"
   },
   "dependencies": {
     "flux": "^2.1.1",
@@ -20,15 +23,17 @@
   "devDependencies": {
     "@papermana/eslint-config-basic": "^1.0.0",
     "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
     "copy-webpack-plugin": "^3.0.1",
     "eslint": "^3.0.1",
     "eslint-plugin-jasmine": "^1.8.1",
     "eslint-plugin-react": "^5.2.2",
     "jest-alias-preprocessor": "^1.0.2",
-    "jest-cli": "^13.2.3",
+    "jest-cli": "^14.1.0",
     "react-addons-test-utils": "^15.2.1",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.1",
+    "webpack-bundle-size-analyzer": "^2.0.2"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/jestPreprocessor.js",

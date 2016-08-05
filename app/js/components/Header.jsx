@@ -1,14 +1,10 @@
 const React = require('react');
-const {
-  AppBar,
-  IconButton,
-  IconMenu,
-  MenuItem,
-  Paper,
-} = require('material-ui');
-const {
-  NavigationMoreVert,
-} = require('material-ui/svg-icons');
+const AppBar = require('material-ui/AppBar').default;
+const IconButton = require('material-ui/IconButton').default;
+const IconMenu = require('material-ui/IconMenu').default;
+const MenuItem = require('material-ui/MenuItem').default;
+const Paper = require('material-ui/Paper').default;
+const NavigationMoreVert = require('material-ui/svg-icons/navigation/more-vert').default;
 const materialColors = require('material-ui/styles/colors');
 const actionCreators = require('@js/actionCreators');
 const consts = require('@js/constants');
@@ -61,7 +57,7 @@ Bar.propTypes = {
   offset: React.PropTypes.number.isRequired,
 };
 
-class Header extends React.Component {
+class Header extends React.PureComponent {
   constructor(props) {
     super(props);
 

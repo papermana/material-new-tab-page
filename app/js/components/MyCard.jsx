@@ -1,8 +1,5 @@
 const React = require('react');
-const {
-  Card,
-  CardActions,
-} = require('material-ui');
+const Paper = require('material-ui/Paper').default;
 
 
 function MyCard(props) {
@@ -17,19 +14,22 @@ function MyCard(props) {
     cardContent: {
       padding: 8,
     },
+    cardActions: {
+      padding: 8,
+    },
   };
 
-  return <Card style={styles.card} >
+  return <Paper style={styles.card} >
     <div style={styles.cardContent} >
       {props.tiles}
     </div>
     {
       props.cardActions &&
-      <CardActions>
+      <div style={styles.cardActions}>
         {props.cardActions}
-      </CardActions>
+      </div>
     }
-  </Card>;
+  </Paper>;
 }
 
 MyCard.propTypes = {

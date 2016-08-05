@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 const webpack = require('webpack');
 const Copy = require('copy-webpack-plugin');
 
@@ -26,10 +28,13 @@ const root = process.cwd();
 
 const config = {
   context: `${root}/app`,
-  entry: './js/main.jsx',
+  entry: {
+    main: './js/main.jsx',
+    backgroundPage: './js/backgroundPage.jsx',
+  },
   output: {
     path: `${root}/dist`,
-    filename: 'app.bundle.js',
+    filename: '[name].bundle.js',
   },
   module: {
     loaders: [
@@ -38,7 +43,7 @@ const config = {
         exclude: [/node_modules/, /__tests__/],
         loader: 'babel-loader',
         query: {
-          presets: ['react'],
+          presets: ['react', 'es2015'],
         },
       },
     ],
@@ -57,6 +62,9 @@ const config = {
     new Copy([
       {
         from: 'index.html',
+      },
+      {
+        from: 'backgroundPage.html',
       },
       {
         from: 'manifest.json',
@@ -80,6 +88,29 @@ if (mode === 'dev') {
 }
 else if (mode === 'production') {
   config.plugins.push(...[
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        screw_ie8: true,
+        sequences: true,
+        properties: true,
+        dead_code: true,
+        drop_debugger: true,
+        conditionals: true,
+        comparisons: true,
+        evaluate: true,
+        booleans: true,
+        loops: true,
+        unused: true,
+        if_return: true,
+        join_vars: true,
+        cascade: true,
+        negate_iife: true,
+        pure_getters: true,
+        drop_console: true,
+        unsafe: true,
+        warnings: false,
+      },
+    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({
