@@ -28,10 +28,13 @@ const root = process.cwd();
 
 const config = {
   context: `${root}/app`,
-  entry: './js/main.jsx',
+  entry: {
+    main: './js/main.jsx',
+    backgroundPage: './js/backgroundPage.jsx',
+  },
   output: {
     path: `${root}/dist`,
-    filename: 'app.bundle.js',
+    filename: '[name].bundle.js',
   },
   module: {
     loaders: [
@@ -40,7 +43,7 @@ const config = {
         exclude: [/node_modules/, /__tests__/],
         loader: 'babel-loader',
         query: {
-          presets: ['react'],
+          presets: ['react', 'es2015'],
         },
       },
     ],
@@ -59,6 +62,9 @@ const config = {
     new Copy([
       {
         from: 'index.html',
+      },
+      {
+        from: 'backgroundPage.html',
       },
       {
         from: 'manifest.json',
@@ -81,17 +87,6 @@ if (mode === 'dev') {
   config.devtool = 'cheap-module-source-map';
 }
 else if (mode === 'production') {
-  config.module.loaders = [
-    {
-      test: /\.(jsx|js)$/,
-      exclude: [/node_modules/, /__tests__/],
-      loader: 'babel-loader',
-      query: {
-        presets: ['react', 'es2015'],
-      },
-    },
-  ];
-
   config.plugins.push(...[
     new webpack.optimize.UglifyJsPlugin({
       compress: {
