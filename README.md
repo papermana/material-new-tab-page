@@ -11,6 +11,6 @@ This version is made using React, Flux, Immutable and the [material-ui](material
 ### Potential performance fixes:
 * When `UglifyJS2` starts supporting minification of pure ES6 code, `babel-preset-es2015` transforms can be removed, since they're only necessary to get Uglify working.
 * As well, using untranspiled versions of some of the libraries might be a feasible decision then.
-* Prerender some parts of the UI to give the user the subjective feeling of a snappier response.
-* Make some `require`s asynchronous.
+* ~~Prerender some parts of the UI to give the user the subjective feeling of a snappier response.~~ Done using a background page.
+* ~~Make some `require`s asynchronous.~~ Done for the main bundle but maybe could be used in other parts, e.g. only loading dialogs on demand.
 * ?
