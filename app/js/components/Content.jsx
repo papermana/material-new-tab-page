@@ -2,12 +2,14 @@ const React = require('react');
 const consts = require('@js/constants');
 const AppsCard = require('@components/AppsCard');
 const TopSitesCard = require('@components/TopSitesCard');
+const WeatherCard = require('@components/WeatherCard');
 const getScrollbarWidth = require('@utils/getScrollbarWidth');
 
 
 const cardsTemplate = {
   apps: AppsCard,
   topSites: TopSitesCard,
+  weather: WeatherCard,
 };
 
 class Content extends React.PureComponent {
