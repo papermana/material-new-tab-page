@@ -125,7 +125,7 @@ class Header extends React.PureComponent {
 
     return <Paper style={styles.wrapper}
       rounded={false}
-      zDepth={this.state.offset > 0 ? 2 : 1} >
+      zDepth={this.state.offset >= consts.HEADER_HEIGHT - 64 ? 2 : 1} >
       <Bar offset={this.state.offset} />
       <SearchBar model={this.props.model} style={styles.searchBar} />
     </Paper>;
