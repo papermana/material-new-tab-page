@@ -16,6 +16,7 @@
     "flux": "^2.1.1",
     "immutable": "^3.8.1",
     "material-ui": "^0.15.2",
+    "moment": "^2.14.1",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-tap-event-plugin": "^1.0.0"
