@@ -19,6 +19,7 @@ function MyCard(props) {
     cardActions: {
       width: '100%',
       padding: 8,
+      borderTop: '1px solid rgba(0,0,0,0.12)',
     },
   };
 
