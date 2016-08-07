@@ -1,11 +1,10 @@
 jest.unmock('@stores/WeatherStore/WeatherStore.init');
 jest.unmock('@stores/WeatherStore/WeatherStore.dataTypes');
-// jest.unmock('moment');
+
 jest.mock('moment', () => {
   return () => ({
     startOf() {
       return {
-        value: '2016-08-07 00:00:00',
         clone() {
           return {
             add() {
@@ -17,7 +16,9 @@ jest.mock('moment', () => {
     },
   });
 });
-let moment = require('moment');
+
+const moment = require('moment');
+
 moment.utc = jest.fn(() => ({
   hour() {
     return 23;
@@ -28,10 +29,10 @@ moment.utc = jest.fn(() => ({
 }));
 
 const Immutable = require('immutable');
-// let moment = require('moment');
 const init = require('@stores/WeatherStore/WeatherStore.init');
 const actionCreators = require('@js/actionCreators');
 const storageHelpers = require('@utils/chromeStorageHelpers');
+
 
 describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
   function getInitAction() {
@@ -94,37 +95,6 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
       }
     });
   }
-
-  const defaultFetch = {
-    today: {
-      name: 'location',
-      main: {
-        temp: 1,
-      },
-      weather: [
-        {
-          main: 'sunny',
-          icon: '01d',
-        },
-      ],
-    },
-    forecast: {
-      list: [
-        {
-          dt_txt: '2016-08-07 23:00:00',
-          main: {
-            temp: 1,
-          },
-          weather: [
-            {
-              main: 'sunny',
-              icon: '01d',
-            },
-          ],
-        },
-      ],
-    },
-  };
 
   const TIMETOWAIT = 1000 * 60 * 60 * 4;
 
@@ -222,24 +192,6 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
     Date.now = jest.fn(() => now);
     window.fetch = jest.fn(arg => mockFetch({argument: arg}));
 
-    // moment = jest.fn({
-    //   startOf: jest.fn(() => '2016-08-07 00:00:00'),
-    //   utc: jest.fn(() => ({
-    //     hour
-    //   })),
-    // });
-
-    // moment = jest.fn(() => ({
-    //   startOf() {
-    //     return '2016-08-07 00:00:00';
-    //   },
-    // }));
-    // jest.setMock('moment', {
-    //   startOf() {
-    //     return '2016-08-07 00:00:00';
-    //   },
-    // });
-
     return init()
     .then(() => {
       const data = new Immutable.Map()
@@ -261,15 +213,11 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
         },
       ]));
 
-      // console.log(data.toJS());
-      // console.log();
-      // console.log(getActionData().toJS());
-
       expect(getActionData().toJS()).toEqual(data.toJS());
-      expect(storageHelpers.setInStorage.mock.calls[0][0].weatherData.toJS()).toEqual(data.toJS());
-      // expect(storageHelpers.setInStorage).toBeCalledWith({
-      //   weatherData: data,
-      // });
+
+      const setInStorageData = storageHelpers.setInStorage.mock.calls[0][0];
+
+      expect(setInStorageData.weatherData.toJS()).toEqual(data.toJS());
     });
   });
 });
