@@ -13,9 +13,11 @@ function MyCard(props) {
       margin: 16,
     },
     cardContent: {
+      width: '100%',
       padding: 8,
     },
     cardActions: {
+      width: '100%',
       padding: 8,
     },
   };
