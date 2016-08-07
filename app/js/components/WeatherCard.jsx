@@ -63,7 +63,7 @@ function ForecastItem(props) {
       {dayOfTheWeek(props.item.date.day())}
     </h3>
     <img src={`assets/weather/${icon}.svg`}
-      width="32" height="32"
+      width="36" height="36"
       style={styles.iconSmall} />
     <div style={styles.timeDay} >
       {props.item.day ? props.item.day.main.temp : '-'}
@@ -145,15 +145,16 @@ function WeatherCard(props) {
     cardActions={actions}>
     <img src={`assets/weather/${weather.today.icon}.svg`}
       style={styles.icon} />
-    <h1 style={styles.city} >
-      {weather.name}
-    </h1>
-    <h2 style={styles.status} >
-      {weather.today.temp}
-      <br />
-      {weather.today.status}
-    </h2>
-
+    <div style={styles.today} >
+      <h1 style={styles.city} >
+        {weather.name}
+      </h1>
+      <h2 style={styles.status} >
+        {weather.today.temp}
+        <br />
+        {weather.today.status}
+      </h2>
+    </div>
     <div style={styles.forecast} >
       {forecast}
     </div>
@@ -166,24 +167,34 @@ WeatherCard.propTypes = {
 };
 
 const styles = {
+  icon: {
+    float: 'right',
+    width: '55%',
+    height: 'auto',
+    padding: 16,
+    pointerEvents: 'none',
+  },
+  today: {
+    position: 'absolute',
+    top: 16,
+    left: 16,
+    maxWidth: 'calc(100% - 32px)',
+  },
   city: {
     padding: '8px 8px 0 8px',
     marginBottom: '0.55em',
-    fontSize: '1.2em',
+    fontSize: 24,
     textTransform: 'uppercase',
+    textShadow: '1px 1px 1px white, -1px -1px 1px white',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
   status: {
     padding: '0 8px',
     marginTop: 0,
-    fontSize: '2.1em',
+    fontSize: 36,
     fontWeight: 'normal',
     lineHeight: '1.6em',
-  },
-  icon: {
-    float: 'right',
-    width: '40%',
-    height: 'auto',
-    padding: 16,
   },
   forecast: {
     display: 'flex',
@@ -196,14 +207,17 @@ const styles = {
   },
   dayOfTheWeek: {
     marginBottom: '0.5em',
+    fontSize: 18,
     textTransform: 'uppercase',
     color: 'rgba(0,0,0,0.55)',
   },
   timeDay: {
     marginTop: '0.5em',
+    fontSize: 14,
   },
   timeNight: {
     marginTop: '0.5em',
+    fontSize: 14,
     color: 'rgba(0,0,140,0.45)',
   },
 };
