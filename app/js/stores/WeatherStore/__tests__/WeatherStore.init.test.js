@@ -50,9 +50,9 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
         resolve({
           ok: true,
           json() {
-            return JSON.stringify({
+            return {
               foo: 'bar',
-            });
+            };
           },
         });
       });
@@ -75,9 +75,9 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
           resolve({
             ok: false,
             json() {
-              return JSON.stringify({
+              return {
                 foo: 'bar',
-              });
+              };
             },
           });
         }
@@ -85,9 +85,9 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
           resolve({
             ok: true,
             json() {
-              return JSON.stringify({
+              return {
                 foo: 'bar',
-              });
+              };
             },
           });
         }
@@ -117,9 +117,9 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
           resolve({
             ok: true,
             json() {
-              return JSON.stringify({
+              return {
                 today: 'test',
-              });
+              };
             },
           });
         }
@@ -127,13 +127,13 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
           resolve({
             ok: true,
             json() {
-              return JSON.stringify({
+              return {
                 forecast: [
                   'test',
                   'test2',
                   'test3',
                 ],
-              });
+              };
             },
           });
         }
