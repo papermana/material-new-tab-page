@@ -1,5 +1,6 @@
 const React = require('react');
 const Paper = require('material-ui/Paper').default;
+const consts = require('@js/constants');
 
 
 function MyCard(props) {
@@ -21,7 +22,7 @@ function MyCard(props) {
 
   return <Paper style={styles.card} >
     <div style={styles.cardContent} >
-      {props.tiles}
+      {props.tiles || props.children}
     </div>
     {
       props.cardActions &&
@@ -34,6 +35,7 @@ function MyCard(props) {
 
 MyCard.propTypes = {
   tiles: React.PropTypes.arrayOf(React.PropTypes.node),
+  children: consts.propTypes.CHILDREN,
   cardActions: React.PropTypes.arrayOf(React.PropTypes.node),
   size: React.PropTypes.oneOf([
     'small',
