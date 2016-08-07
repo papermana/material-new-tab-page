@@ -1,4 +1,5 @@
 const Immutable = require('immutable');
+const moment = require('moment');
 const actionCreators = require('@js/actionCreators');
 const storageHelpers = require('@utils/chromeStorageHelpers');
 
@@ -38,8 +39,7 @@ function init() {
       else {
         throw new Error('Failed to receive weather data for today');
       }
-    })
-    .then(response => Immutable.fromJS(response));
+    });
 
     const forecast = fetch(`${BASEURL}forecast?q={$city}&APPID=${APPID}`)
     .then(response => {
@@ -49,26 +49,78 @@ function init() {
       else {
         throw new Error('Failed to receive weather forecast');
       }
-    })
-    .then(response => Immutable.fromJS(response));
+    });
 
     return Promise.all([today, forecast])
     .then(([today, forecast]) => {
+      const weather = {
+        location: today.name,
+        today: {
+          temp: today.main.temp,
+          status: today.weather[0].main,
+          icon: today.weather[0].icon,
+        },
+        forecast: [],
+      };
+
+      const now = moment().startOf('day');
+      let currentDay = 0;
+
+      forecast.list
+      .map(entry => ({
+        date: moment.utc(entry.dt_txt),
+        weather: {
+          temp: entry.main.temp,
+          status: entry.weather[0].main,
+          icon: entry.weather[0].icon,
+        },
+      }))
+      .filter(entry => isDay(entry.date.hour()) || isNight(entry.date.hour()))
+      .forEach(entry => {
+        if (isDay(entry.date.hour()) && entry.date.date() !== now.date()) {
+          currentDay++;
+        }
+
+        if (!weather.forecast[currentDay]) {
+          weather.forecast[currentDay] = {
+            date: now.clone().add(currentDay, 'd'),
+          };
+        }
+
+        const time = isDay(entry.date.hour()) ? 'day' : 'night';
+
+        weather.forecast[currentDay][time] = entry.weather;
+      });
+
+      return weather;
+    })
+    .then(weather => {
       state = state
-      .set('lastChecked', Date.now())
-      .set('today', today)
-      .set('forecast', forecast);
+      .mergeDeep(weather)
+      .set('lastChecked', Date.now());
 
       actionCreators.initWeatherStore(state);
-
-      return state;
-    })
-    .then(state => {
       storageHelpers.setInStorage({
         weatherData: state,
       });
     });
   });
+}
+
+//  The forecast is a list of objects containing weather data,
+//  all set 3 hours apart.
+//  We only want one reading for the day and one for the night, so we'll pick
+//  those that have hours closest to desired. The first item in the forecast is
+//  from as recently as possible (e.g. if it's fetched on 16:25, list[0] is going
+//  to be for 16:00), and subsequent forecasts are set exactly 3 hours
+//  from each other. Therefore, we're not guaranteed to have a forecast
+//  for 12:00, for example. We can only approximate.
+function isDay(hour) {
+  return hour === 11 || hour === 12 || hour === 13;
+}
+
+function isNight(hour) {
+  return hour === 23 || hour === 0 || hour === 1;
 }
 
 

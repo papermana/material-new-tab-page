@@ -6,21 +6,6 @@ const consts = require('@js/constants');
 const MyCard = require('@components/MyCard');
 
 
-//  The forecast is a list of objects containing weather data, all set 3 hours apart.
-//  We only want one reading for the day and one for the night, so we'll pick
-//  those that have hours closest to desired. The first item in the forecast is
-//  from as recently as possible (e.g. if it's fetched on 16:25, list[0] is going
-//  to be for 16:00), and subsequent forecasts are set exactly 3 hours from each other.
-//  Therefore, we're not guaranteed to have a forecast for 12:00, for example. We can
-//  only approximate.
-function isDay(hour) {
-  return hour === 11 || hour === 12 || hour === 13;
-}
-
-function isNight(hour) {
-  return hour === 23 || hour === 0 || hour === 1;
-}
-
 function dayOfTheWeek(day) {
   const days = [
     'Sun',
@@ -53,8 +38,8 @@ function colors(icon) {
 
 function ForecastItem(props) {
   const icon = props.item.day
-    ? props.item.day.weather[0].icon
-    : props.item.night.weather[0].icon;
+    ? props.item.day.icon
+    : props.item.night.icon;
 
   styles.dayOfTheWeek.color = colors(icon);
 
@@ -66,10 +51,10 @@ function ForecastItem(props) {
       width="36" height="36"
       style={styles.iconSmall} />
     <div style={styles.timeDay} >
-      {props.item.day ? props.item.day.main.temp : '-'}
+      {props.item.day ? props.item.day.temp : '-'}
     </div>
     <div style={styles.timeNight} >
-      {props.item.night ? props.item.night.main.temp : '-'}
+      {props.item.night ? props.item.night.temp : '-'}
     </div>
   </div>;
 }
@@ -87,45 +72,7 @@ function WeatherCard(props) {
     return null;
   }
 
-  const today = props.model.weather.today.toJS();
-  const weather = {
-    name: today.name,
-    today: {},
-    forecast: [],
-  };
-
-  weather.today = {
-    temp: today.main.temp,
-    status: today.weather[0].main,
-    icon: today.weather[0].icon,
-  };
-
-  const now = moment().startOf('day');
-  let currentDay = 0;
-
-  props.model.weather.getIn(['forecast', 'list'])
-  .toJS()
-  .map(item => ({
-    date: moment.utc(item.dt_txt),
-    weather: item,
-  }))
-  .filter(item => isDay(item.date.hour()) || isNight(item.date.hour()))
-  .forEach(item => {
-    if (isDay(item.date.hour()) && item.date.date() !== now.date()) {
-      currentDay++;
-    }
-
-    if (!weather.forecast[currentDay]) {
-      weather.forecast[currentDay] = {
-        date: now.clone().add(currentDay, 'd'),
-      };
-    }
-
-    const time = isDay(item.date.hour()) ? 'day' : 'night';
-
-    weather.forecast[currentDay][time] = item.weather;
-  });
-
+  const weather = props.model.weather.toJS();
   const forecast = weather.forecast
   .map((item, key) => {
     return <ForecastItem key={key}
@@ -147,7 +94,7 @@ function WeatherCard(props) {
       style={styles.icon} />
     <div style={styles.today} >
       <h1 style={styles.city} >
-        {weather.name}
+        {weather.location}
       </h1>
       <h2 style={styles.status} >
         {weather.today.temp}
