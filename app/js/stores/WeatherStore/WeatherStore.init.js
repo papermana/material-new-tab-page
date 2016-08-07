@@ -10,7 +10,7 @@ function init(state) {
   const timeToWait = 1000 * 60 * 60 * 4;
   const lastChecked = state.lastChecked;
   const APPID = '8abe6b7721a64a5e06660f56047d1f59';
-  const BASEURL = 'https://api.openweathermap.org/data/2.5/';
+  const BASEURL = 'http://api.openweathermap.org/data/2.5/';
 
   if (lastChecked && Date.now() - lastChecked < timeToWait) {
     actionCreators.initWeatherStore(state);
