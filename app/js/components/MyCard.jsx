@@ -15,6 +15,7 @@ function MyCard(props) {
     cardContent: {
       width: '100%',
       padding: 8,
+      position: 'relative',
     },
     cardActions: {
       width: '100%',
