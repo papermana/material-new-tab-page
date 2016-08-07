@@ -6,6 +6,12 @@ const constants = {};
 
 constants.HEADER_HEIGHT = 4 * 64;
 constants.SEARCHBAR_HEIGHT = 52;
+constants.cardWidth = tileSize => {
+  tileSize = tileSize === 'small' ? 96 : 128;
+
+  return tileSize * 4 + 16;
+};
+constants.cardMargin = 16;
 
 constants.propTypes = {
   MODEL: React.PropTypes.shape({

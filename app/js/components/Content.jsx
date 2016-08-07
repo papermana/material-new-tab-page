@@ -33,15 +33,17 @@ class Content extends React.PureComponent {
         margin: 'auto',
         flexWrap: 'wrap',
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
       },
     };
+    const cardSize = this.props.dimensions.width < consts.breakpoints.medium ? 'small' : 'medium';
 
     if (this.props.dimensions.width < consts.breakpoints.medium) {
-      styles.main.width = '100%';
+      styles.main.width = consts.cardWidth(cardSize) + consts.cardMargin * 2;
     }
     else {
-      styles.main.width = 10 / 12 * 100 + '%';
+      styles.main.width = (consts.cardWidth(cardSize) + consts.cardMargin * 2) * 2;
     }
 
     const features = this.props.model.config && this.props.model.config.features;
@@ -54,7 +56,7 @@ class Content extends React.PureComponent {
 
       return <Card key={key}
         model={this.props.model}
-        size={this.props.dimensions.width < consts.breakpoints.medium ? 'small' : 'medium'} />;
+        size={cardSize} />;
     });
 
     return <div id="main-wrapper" style={styles.wrapper} >

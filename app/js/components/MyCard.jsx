@@ -4,13 +4,12 @@ const consts = require('@js/constants');
 
 
 function MyCard(props) {
-  const size = props.size === 'small' ? 96 : 128;
   const styles = {
     card: {
       display: 'flex',
-      width: size * 4 + 16,
+      width: consts.cardWidth(props.size),
       flexWrap: 'wrap',
-      margin: 16,
+      margin: consts.cardMargin,
     },
     cardContent: {
       width: '100%',
