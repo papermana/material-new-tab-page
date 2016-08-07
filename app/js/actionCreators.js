@@ -18,6 +18,7 @@ const actionCreators = {};
   'initAppsStore',
   'initTopSitesStore',
   'initConfigStore',
+  'initWeatherStore',
   'setConfig',
   'goTo',
   'goBack',

@@ -27,7 +27,7 @@ function init(state) {
       throw new Error('Failed to receive weather data for today');
     }
   })
-  .then(response => Immutable.fromJS(JSON.parse(response)));
+  .then(response => Immutable.fromJS(response));
 
   const forecast = fetch(`${BASEURL}forecast?q={$city}&APPID=${APPID}`)
   .then(response => {
@@ -38,7 +38,7 @@ function init(state) {
       throw new Error('Failed to receive weather forecast');
     }
   })
-  .then(response => Immutable.fromJS(JSON.parse(response)));
+  .then(response => Immutable.fromJS(response));
 
   //  We're assigning this only for the purposes of testing:
   const test = Promise.all([today, forecast])
