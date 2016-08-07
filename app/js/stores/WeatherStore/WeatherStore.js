@@ -16,7 +16,7 @@ class WeatherStore extends ReduceStore {
   reduce(state, action) {
     if (action.type === 'permissionsGranted') {
       if (action.data.weather) {
-        init(state);
+        init();
       }
 
       return state;

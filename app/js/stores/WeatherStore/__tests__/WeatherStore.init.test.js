@@ -4,9 +4,7 @@ jest.unmock('@stores/WeatherStore/WeatherStore.dataTypes');
 const Immutable = require('immutable');
 const init = require('@stores/WeatherStore/WeatherStore.init');
 const actionCreators = require('@js/actionCreators');
-const {
-  WeatherStoreState: WeatherStoreStateRecord,
-} = require('@stores/WeatherStore/WeatherStore.dataTypes');
+const storageHelpers = require('@utils/chromeStorageHelpers');
 
 describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
   function getInitAction() {
@@ -21,54 +19,59 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
 
   beforeEach(() => {
     actionCreators.initWeatherStore = jest.fn();
-
-    window.fetch = jest.fn();
+    storageHelpers.getFromStorage = jest.fn(() => Promise.resolve(undefined));
+    storageHelpers.setInStorage = jest.fn();
+    window.fetch = jest.fn(() => Promise.resolve({
+      ok: true,
+      json: () => {},
+    }));
     Date.now = jest.fn();
     window.test = jest.fn();
   });
 
-  it('shouldn create the `initWeatherStore` action with the unchanged state it got invoked with if the difference between current time (as a Unix timestamp) and the `lastChecked` property in state is bigger than a set amount', () => {
-    const state = new WeatherStoreStateRecord({
-      lastChecked: 1,
+  it('should try to extract saved weather data from local storage first', () => {
+    return init()
+    .then(() => {
+      expect(storageHelpers.getFromStorage).toBeCalledWith('weatherData');
     });
-
-    Date.now = jest.fn(() => state.lastChecked + TIMETOWAIT - 1);
-
-    init(state);
-
-    expect(getInitAction()).toBeCalledWith(state);
   });
 
-  it('should call `fetch()` if enough time has passed', () => {
-    const state = new WeatherStoreStateRecord({
-      lastChecked: 1,
+  it('should try to fetch weather data if there\'s no `lastChecked` property in storage', () => {
+    return init()
+    .then(() => {
+      expect(window.fetch).toBeCalled();
     });
+  });
 
-    Date.now = jest.fn(() => state.lastChecked + TIMETOWAIT);
-    window.fetch = jest.fn(() => {
-      return new Promise((resolve, reject) => {
-        resolve({
-          ok: true,
-          json() {
-            return {
-              foo: 'bar',
-            };
-          },
-        });
-      });
+  it('should NOT fetch data if there is `lastChecked` property in storage and the difference between it and the current time (as a Unix timestamp) is larger than a set threshold', () => {
+    const lastChecked = 1;
+
+    storageHelpers.getFromStorage = jest.fn(() => Promise.resolve(Immutable.fromJS({
+      lastChecked,
+    })));
+    Date.now = jest.fn(() => lastChecked + TIMETOWAIT - 1);
+
+    return init()
+    .then(() => {
+      expect(window.fetch).not.toBeCalled();
     });
+  });
 
-    init(state);
+  it('should try to fetch the data if sufficient time has passed since the last fetch', () => {
+    const lastChecked = 1;
 
-    expect(window.fetch).toBeCalled();
+    storageHelpers.getFromStorage = jest.fn(() => Promise.resolve(Immutable.fromJS({
+      lastChecked,
+    })));
+    Date.now = jest.fn(() => lastChecked + TIMETOWAIT);
+
+    return init()
+    .then(() => {
+      expect(window.fetch).toBeCalled();
+    });
   });
 
   it('should throw an error if `fetch()` responds with an object whose property `ok` is not truthy', () => {
-    const state = new WeatherStoreStateRecord({
-      lastChecked: 1,
-    });
-
-    Date.now = jest.fn(() => state.lastChecked + TIMETOWAIT);
     window.fetch = jest.fn(string => {
       return new Promise((resolve, reject) => {
         if (string.includes('/weather?q=')) {
@@ -94,9 +97,7 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
       });
     });
 
-    init(state);
-
-    return window.test.mock.calls[0][0]
+    return init()
     .then(() => {
       expect('This promise should not resolve').toBe(true);
     })
@@ -105,12 +106,27 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
     });
   });
 
-  it('should include the responses it get\'s from `fetch()` in the data it sends along the action `initWeatherStore`', () => {
-    const state = new WeatherStoreStateRecord({
-      lastChecked: 1,
+  it('should create the `initWeatherStore` action in a situation when it doesn\'t fetch, and pass the data it got from storage', () => {
+    const lastChecked = 1;
+    const storageData = Immutable.fromJS({
+      lastChecked,
+      today: undefined,
+      forecast: undefined,
     });
 
-    Date.now = jest.fn(() => state.lastChecked + TIMETOWAIT);
+    storageHelpers.getFromStorage = jest.fn(() => Promise.resolve(storageData));
+    Date.now = jest.fn(() => lastChecked + TIMETOWAIT - 1);
+
+    return init()
+    .then(() => {
+      expect(getInitAction()).toBeCalledWith(storageData);
+    });
+  });
+
+  it('should include the responses it get\'s from `fetch()` in the data it sends along the action `initWeatherStore`, and subsequently set it in storage', () => {
+    const now = 123456;
+
+    Date.now = jest.fn(() => now);
     window.fetch = jest.fn(string => {
       return new Promise((resolve, reject) => {
         if (string.includes('/weather?q=')) {
@@ -140,12 +156,10 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
       });
     });
 
-    init(state);
-
-    return window.test.mock.calls[0][0]
+    return init()
     .then(() => {
-      const newState = state
-      .set('lastChecked', state.lastChecked + TIMETOWAIT)
+      const data = new Immutable.Map()
+      .set('lastChecked', now)
       .set('today', Immutable.fromJS({
         today: 'test',
       }))
@@ -157,7 +171,10 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
         ],
       }));
 
-      expect(Immutable.is(getActionData(), newState)).toBe(true);
+      expect(getActionData()).toEqual(data);
+      expect(storageHelpers.setInStorage).toBeCalledWith({
+        weatherData: data,
+      });
     });
   });
 });
