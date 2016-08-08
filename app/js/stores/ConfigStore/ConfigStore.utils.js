@@ -23,14 +23,13 @@ function init() {
       config = {
         features: {},
         searchEngine: 'Google',
-        tempUnits: 'celsius',
       };
     }
 
     return {
       features: new FeaturesRecord(config.features),
       searchEngine: findEngine(config.searchEngine),
-      tempUnits: config.tempUnits,
+      tempUnits: config.tempUnits || 'celsius',
     };
   })
   .then(config => actionCreators.initConfigStore(config));
