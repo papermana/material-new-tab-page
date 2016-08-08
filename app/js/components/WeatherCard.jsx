@@ -36,6 +36,19 @@ function colors(icon) {
   return colors[icon.slice(0, 2)];
 }
 
+//  Takes kelvins as input:
+function temperature(temp, units) {
+  if (units === 'celsius') {
+    return (temp - 273.15).toFixed() + '°C';
+  }
+  else if (units === 'fahrenheit') {
+    return (temp * (9 / 5) - 459.67).toFixed() + '°F';
+  }
+  else {
+    throw new Error('Temperature can be rendered either in Celsius or Fahrenheit!');
+  }
+}
+
 function ForecastItem(props) {
   const icon = props.item.day
     ? props.item.day.icon
@@ -51,10 +64,10 @@ function ForecastItem(props) {
       width="36" height="36"
       style={styles.iconSmall} />
     <div style={styles.timeDay} >
-      {props.item.day ? props.item.day.temp : '-'}
+      {props.item.day ? temperature(props.item.day.temp, props.units) : '-'}
     </div>
     <div style={styles.timeNight} >
-      {props.item.night ? props.item.night.temp : '-'}
+      {props.item.night ? temperature(props.item.night.temp, props.units) : '-'}
     </div>
   </div>;
 }
@@ -65,6 +78,10 @@ ForecastItem.propTypes = {
     day: React.PropTypes.object,
     night: React.PropTypes.object,
   }).isRequired,
+  units: React.PropTypes.oneOf([
+    'celsius',
+    'fahrenheit',
+  ]).isRequired,
 };
 
 function WeatherCard(props) {
@@ -76,7 +93,8 @@ function WeatherCard(props) {
   const forecast = weather.forecast
   .map((item, key) => {
     return <ForecastItem key={key}
-      item={item} />;
+      item={item}
+      units={props.model.config.tempUnits} />;
   });
   const actions = [
     <FlatButton key={0}
@@ -97,7 +115,7 @@ function WeatherCard(props) {
         {weather.location}
       </h1>
       <h2 style={styles.status} >
-        {weather.today.temp}
+        {temperature(weather.today.temp, props.model.config.tempUnits)}
         <br />
         {weather.today.status}
       </h2>

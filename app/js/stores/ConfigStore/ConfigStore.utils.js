@@ -23,12 +23,14 @@ function init() {
       config = {
         features: {},
         searchEngine: 'Google',
+        tempUnits: 'celsius',
       };
     }
 
     return {
       features: new FeaturesRecord(config.features),
       searchEngine: findEngine(config.searchEngine),
+      tempUnits: config.tempUnits,
     };
   })
   .then(config => actionCreators.initConfigStore(config));
@@ -138,10 +140,15 @@ function setConfig(changes, state) {
     searchEngine = changes.searchEngine;
   }
 
+  if (changes.tempUnits) {
+    state = state.set('tempUnits', changes.tempUnits);
+  }
+
   storageHelpers.setInStorage({
     config: {
       features: state.toJS().features,
       searchEngine,
+      tempUnits: changes.tempUnits,
     },
   });
 

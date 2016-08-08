@@ -50,6 +50,7 @@ describe('`ConfigStore.utils` - Utility functions for `ConfigStore`', () => {
             name: 'Google',
             url: 'https://google.com/search?q=',
           }),
+          tempUnits: 'celsius',
         });
       });
     });
@@ -62,6 +63,7 @@ describe('`ConfigStore.utils` - Utility functions for `ConfigStore`', () => {
           topSites: false,
         },
         searchEngine: 'DuckDuckGo',
+        tempUnits: 'celsius',
       }));
 
       return utils.init()
@@ -76,6 +78,7 @@ describe('`ConfigStore.utils` - Utility functions for `ConfigStore`', () => {
             name: 'DuckDuckGo',
             url: 'https://duckduckgo.com/?q=',
           }),
+          tempUnits: 'celsius',
         });
       });
     });
@@ -235,6 +238,7 @@ describe('`ConfigStore.utils` - Utility functions for `ConfigStore`', () => {
           name: 'Google',
           url: 'https://google.com/search?q=',
         }),
+        tempUnits: 'celsius',
       });
       const callResult = utils.setConfig({
         features: {
@@ -253,6 +257,7 @@ describe('`ConfigStore.utils` - Utility functions for `ConfigStore`', () => {
           name: 'Google',
           url: 'https://google.com/search?q=',
         },
+        tempUnits: 'celsius',
         ready: false,
       });
     });
@@ -272,6 +277,7 @@ describe('`ConfigStore.utils` - Utility functions for `ConfigStore`', () => {
           name: 'Bing',
           url: 'https://bing.com/search?q=',
         },
+        tempUnits: 'celsius',
         ready: false,
       });
     });
@@ -287,12 +293,14 @@ describe('`ConfigStore.utils` - Utility functions for `ConfigStore`', () => {
           name: 'Google',
           url: 'https://google.com/search?q=',
         }),
+        tempUnits: 'celsius',
       });
       const callResult = utils.setConfig({
         features: {
           topSites: true,
         },
         searchEngine: 'DuckDuckGo',
+        tempUnits: 'fahrenheit',
       }, state);
 
       expect(callResult.toJS()).toEqual({
@@ -304,6 +312,7 @@ describe('`ConfigStore.utils` - Utility functions for `ConfigStore`', () => {
           name: 'DuckDuckGo',
           url: 'https://duckduckgo.com/?q=',
         },
+        tempUnits: 'fahrenheit',
         ready: false,
       });
       expect(storageHelpers.setInStorage).toBeCalledWith({
@@ -313,6 +322,7 @@ describe('`ConfigStore.utils` - Utility functions for `ConfigStore`', () => {
             topSites: true,
           },
           searchEngine: 'DuckDuckGo',
+          tempUnits: 'fahrenheit',
         },
       });
     });

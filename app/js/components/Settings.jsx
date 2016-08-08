@@ -33,6 +33,13 @@ class Settings extends React.PureComponent {
     });
   }
 
+  tempUnitsChange(e) {
+    this.setState({
+      gotChanged: true,
+      newConfig: this.state.newConfig.set('tempUnits', e.target.value),
+    });
+  }
+
   exit() {
     this.setState({
       gotChanged: false,
@@ -85,6 +92,16 @@ class Settings extends React.PureComponent {
         {engines}
       </RadioButtonGroup>;
     })();
+    const tempUnits = config && (() => {
+      const defaultUnits = config.tempUnits;
+
+      return <RadioButtonGroup name="tempUnits"
+        defaultSelected={defaultUnits}
+        onChange={this.tempUnitsChange.bind(this)} >
+        <RadioButton value="celsius" label="Celsius" />
+        <RadioButton value="fahrenheit" label="Fahrenheit" />
+      </RadioButtonGroup>;
+    })();
     const buttons = [
       <FlatButton label="Cancel"
         onClick={this.exit.bind(this)} />,
@@ -105,6 +122,9 @@ class Settings extends React.PureComponent {
 
       <h2>Search engine:</h2>
       {searchEngines}
+
+      <h2>Temperature units:</h2>
+      {tempUnits}
     </Dialog>;
   }
 }
