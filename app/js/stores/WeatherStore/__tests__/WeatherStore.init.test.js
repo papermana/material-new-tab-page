@@ -3,6 +3,7 @@ jest.unmock('@stores/WeatherStore/WeatherStore.dataTypes');
 
 jest.mock('moment', () => {
   return () => ({
+    value: 'moment',
     startOf() {
       return {
         clone() {
@@ -124,8 +125,10 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
   it('should NOT fetch data if there is `lastChecked` property in storage and the difference between it and the current time (as a Unix timestamp) is larger than a set threshold', () => {
     const lastChecked = 1;
 
-    storageHelpers.getFromStorage = jest.fn(() => Promise.resolve(Immutable.fromJS({
+    storageHelpers.getFromStorage = jest.fn(() => Promise.resolve(JSON.stringify({
       lastChecked,
+      today: {},
+      forecast: [],
     })));
     Date.now = jest.fn(() => lastChecked + TIMETOWAIT - 1);
 
@@ -138,8 +141,10 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
   it('should try to fetch the data if sufficient time has passed since the last fetch', () => {
     const lastChecked = 1;
 
-    storageHelpers.getFromStorage = jest.fn(() => Promise.resolve(Immutable.fromJS({
+    storageHelpers.getFromStorage = jest.fn(() => Promise.resolve(JSON.stringify({
       lastChecked,
+      today: {},
+      forecast: [],
     })));
     Date.now = jest.fn(() => lastChecked + TIMETOWAIT);
 
@@ -171,18 +176,56 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
 
   it('should create the `initWeatherStore` action in a situation when it doesn\'t fetch, and pass the data it got from storage', () => {
     const lastChecked = 1;
-    const storageData = Immutable.fromJS({
+    const storageData = {
       lastChecked,
-      today: undefined,
-      forecast: undefined,
-    });
+      location: 'location',
+      today: {
+        temp: 10,
+        status: 'rainy',
+        icon: '08n',
+      },
+      forecast: [
+        {
+          date: '2016-08-07T22:00:00.000Z',
+          weather: {
+            temp: 15,
+            status: 'rainy',
+            icon: '08n',
+          },
+        },
+        {
+          date: '2016-08-08T22:00:00.000Z',
+          weather: {
+            temp: 20,
+            status: 'rainy',
+            icon: '08n',
+          },
+        },
+      ],
+    };
 
-    storageHelpers.getFromStorage = jest.fn(() => Promise.resolve(storageData));
+    storageHelpers.getFromStorage = jest.fn(() => {
+      return Promise.resolve(JSON.stringify(storageData));
+    });
     Date.now = jest.fn(() => lastChecked + TIMETOWAIT - 1);
 
     return init()
     .then(() => {
-      expect(getInitAction()).toBeCalledWith(storageData);
+      //  Due to the way `moment()` is mocked, it's difficult to compare objects
+      //  containing results of that function.
+      //  So we'll try to go around the problem:
+      const actionData = getActionData().toJS();
+
+      expect(actionData.forecast[0].date.value).toBe('moment');
+      expect(actionData.forecast[1].date.value).toBe('moment');
+
+      actionData.forecast.forEach(forecast => {
+        forecast.date = 'moment';
+      });
+      storageData.forecast.forEach(forecast => {
+        forecast.date = 'moment';
+      });
+      expect(actionData).toEqual(storageData);
     });
   });
 
@@ -217,7 +260,7 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
 
       const setInStorageData = storageHelpers.setInStorage.mock.calls[0][0];
 
-      expect(setInStorageData.weatherData.toJS()).toEqual(data.toJS());
+      expect(JSON.parse(setInStorageData.weatherData)).toEqual(data.toJS());
     });
   });
 });
