@@ -12,6 +12,13 @@ function init() {
   return storageHelpers.getFromStorage('weatherData')
   .then(weatherData => {
     if (weatherData) {
+      weatherData = Immutable.fromJS(JSON.parse(weatherData));
+
+      const forecastMapped = weatherData.get('forecast')
+      .map(entry => entry.update('date', moment));
+
+      weatherData = weatherData.set('forecast', forecastMapped);
+
       return weatherData;
     }
     else {
@@ -101,7 +108,7 @@ function init() {
 
       actionCreators.initWeatherStore(state);
       storageHelpers.setInStorage({
-        weatherData: state,
+        weatherData: JSON.stringify(state.toJS()),
       });
     });
   });
