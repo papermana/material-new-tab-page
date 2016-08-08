@@ -48,7 +48,7 @@ function init() {
       }
     });
 
-    const forecast = fetch(`${BASEURL}forecast?q={$city}&APPID=${APPID}`)
+    const forecast = fetch(`${BASEURL}forecast?q=${city}&APPID=${APPID}`)
     .then(response => {
       if (response.ok) {
         return response.json();
