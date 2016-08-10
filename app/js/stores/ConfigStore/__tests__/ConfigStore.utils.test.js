@@ -343,5 +343,45 @@ describe('`ConfigStore.utils` - Utility functions for `ConfigStore`', () => {
         },
       });
     });
+
+    it('should remove `weatherData` from storage if certain config properties having to do with weather are changed, in order to refetch the correct data', () => {
+      storageHelpers.removeFromStorage = jest.fn();
+
+      const state = new ConfigStoreState({
+        features: {
+          apps: false,
+        },
+        searchEngine: new SearchEngineRecord({
+          name: 'Google',
+          url: 'https://google.com/search?q=',
+        }),
+        useGeolocation: false,
+        customLocation: undefined,
+      });
+
+      utils.setConfig({
+        useGeolocation: true,
+      }, state);
+
+      expect(storageHelpers.removeFromStorage).toBeCalled();
+
+      storageHelpers.removeFromStorage = jest.fn();
+
+      utils.setConfig({
+        customLocation: 'location',
+      }, state);
+
+      expect(storageHelpers.removeFromStorage).toBeCalled();
+
+      storageHelpers.removeFromStorage = jest.fn();
+
+      utils.setConfig({
+        features: {
+          apps: true,
+        },
+      }, state);
+
+      expect(storageHelpers.removeFromStorage).not.toBeCalled();
+    });
   });
 });

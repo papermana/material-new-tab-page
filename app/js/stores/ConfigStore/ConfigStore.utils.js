@@ -153,6 +153,11 @@ function setConfig(changes, state) {
     state = state.set('customLocation', changes.customLocation);
   }
 
+  if (changes.useGeolocation || changes.customLocation) {
+    //  Refetch the weather data:
+    storageHelpers.removeFromStorage('weatherData');
+  }
+
   storageHelpers.setInStorage({
     config: {
       features: state.toJS().features,
