@@ -29,6 +29,8 @@ function init() {
     return {
       features: new FeaturesRecord(config.features),
       searchEngine: findEngine(config.searchEngine),
+      useGeolocation: config.useGeolocation || false,
+      customLocation: config.customLocation,
       tempUnits: config.tempUnits || 'celsius',
     };
   })
@@ -143,10 +145,20 @@ function setConfig(changes, state) {
     state = state.set('tempUnits', changes.tempUnits);
   }
 
+  if (changes.useGeolocation) {
+    state = state.set('useGeolocation', changes.useGeolocation);
+  }
+
+  if (changes.customLocation) {
+    state = state.set('customLocation', changes.customLocation);
+  }
+
   storageHelpers.setInStorage({
     config: {
       features: state.toJS().features,
       searchEngine,
+      useGeolocation: changes.useGeolocation,
+      customLocation: changes.customLocation,
       tempUnits: changes.tempUnits,
     },
   });

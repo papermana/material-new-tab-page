@@ -97,11 +97,29 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
     });
   }
 
+  function mockGetFromStorage(options = {}) {
+    return jest.fn(argument => {
+      let response;
+
+      if (argument === 'config') {
+        response = options.config || {
+          useGeolocation: false,
+          customLocation: false,
+        };
+      }
+      else if (argument === 'weatherData') {
+        response = options.weatherData || undefined;
+      }
+
+      return Promise.resolve(response);
+    });
+  }
+
   const TIMETOWAIT = 1000 * 60 * 60 * 4;
 
   beforeEach(() => {
     actionCreators.initWeatherStore = jest.fn();
-    storageHelpers.getFromStorage = jest.fn(() => Promise.resolve(undefined));
+    storageHelpers.getFromStorage = mockGetFromStorage();
     storageHelpers.setInStorage = jest.fn();
     window.fetch = jest.fn(arg => mockFetch({argument: arg}));
     Date.now = jest.fn();
@@ -125,11 +143,13 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
   it('should NOT fetch data if there is `lastChecked` property in storage and the difference between it and the current time (as a Unix timestamp) is larger than a set threshold', () => {
     const lastChecked = 1;
 
-    storageHelpers.getFromStorage = jest.fn(() => Promise.resolve(JSON.stringify({
-      lastChecked,
-      today: {},
-      forecast: [],
-    })));
+    storageHelpers.getFromStorage = mockGetFromStorage({
+      weatherData: JSON.stringify({
+        lastChecked,
+        today: {},
+        forecast: [],
+      }),
+    });
     Date.now = jest.fn(() => lastChecked + TIMETOWAIT - 1);
 
     return init()
@@ -141,11 +161,13 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
   it('should try to fetch the data if sufficient time has passed since the last fetch', () => {
     const lastChecked = 1;
 
-    storageHelpers.getFromStorage = jest.fn(() => Promise.resolve(JSON.stringify({
-      lastChecked,
-      today: {},
-      forecast: [],
-    })));
+    storageHelpers.getFromStorage = mockGetFromStorage({
+      weatherData: JSON.stringify({
+        lastChecked,
+        today: {},
+        forecast: [],
+      }),
+    });
     Date.now = jest.fn(() => lastChecked + TIMETOWAIT);
 
     return init()
@@ -204,8 +226,8 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
       ],
     };
 
-    storageHelpers.getFromStorage = jest.fn(() => {
-      return Promise.resolve(JSON.stringify(storageData));
+    storageHelpers.getFromStorage = mockGetFromStorage({
+      weatherData: JSON.stringify(storageData),
     });
     Date.now = jest.fn(() => lastChecked + TIMETOWAIT - 1);
 

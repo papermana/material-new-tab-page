@@ -5,6 +5,7 @@ const Dialog = require('material-ui/Dialog').default;
 const FlatButton = require('material-ui/FlatButton').default;
 const RadioButton = require('material-ui/RadioButton').default;
 const RadioButtonGroup = require('material-ui/RadioButton/RadioButtonGroup').default;
+const TextField = require('material-ui/TextField').default;
 const actionCreators = require('@js/actionCreators');
 const consts = require('@js/constants');
 
@@ -30,6 +31,20 @@ class Settings extends React.PureComponent {
     this.setState({
       gotChanged: true,
       newConfig: this.state.newConfig.set('searchEngine', e.target.value),
+    });
+  }
+
+  geolocationChange(e) {
+    this.setState({
+      gotChanged: true,
+      newConfig: this.state.newConfig.set('useGeolocation', e.target.checked),
+    });
+  }
+
+  customLocationChange(e) {
+    this.setState({
+      gotChanged: true,
+      newConfig: this.state.newConfig.set('customLocation', e.target.value),
     });
   }
 
@@ -92,6 +107,14 @@ class Settings extends React.PureComponent {
         {engines}
       </RadioButtonGroup>;
     })();
+    const useGeolocation = config && <Checkbox label="Use geolocation to automatically detect where you are."
+      name="useGeolocation"
+      defaultChecked={config.useGeolocation}
+      onCheck={this.geolocationChange.bind(this)} />;
+    const customLocation = config && <TextField name="customLocation"
+      hintText="Enter city name of ID"
+      disabled={config.useGeolocation || this.state.newConfig.get('useGeolocation')}
+      onChange={this.customLocationChange.bind(this)} />;
     const tempUnits = config && (() => {
       const defaultUnits = config.tempUnits;
 
@@ -122,6 +145,12 @@ class Settings extends React.PureComponent {
 
       <h2>Search engine:</h2>
       {searchEngines}
+
+      <h2>Location:</h2>
+      <p>Used for getting the weather forecast.</p>
+      <p>It is best to use a city <a href="https://weather.codes/" target="_blank">unique ID</a>.</p>
+      {useGeolocation}
+      {customLocation}
 
       <h2>Temperature units:</h2>
       {tempUnits}

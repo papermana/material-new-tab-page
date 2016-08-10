@@ -9,7 +9,7 @@ const city = 'Warsaw, PL';
 
 function init() {
   //  We only return this promise for the purposes of testing:
-  return Promise.all([getDataFromStorage()])
+  return Promise.all([getDataFromStorage(), getLocation()])
   .then(([state]) => {
     // Minimum period of time to wait before we load another forecast (in ms):
     const timeToWait = 1000 * 60 * 60 * 4;
@@ -22,7 +22,8 @@ function init() {
     }
     else {
       //  Return for testing:
-      return fetchNewData(state)
+      return getLocation()
+      .then(location => fetchNewData(state, location))
       .then(state => {
         actionCreators.initWeatherStore(state);
         storageHelpers.setInStorage({
@@ -52,11 +53,49 @@ function getDataFromStorage() {
   });
 }
 
-function fetchNewData(state) {
+function getLocation() {
+  return getConfig()
+  .then(config => {
+    if (config.useGeolocation) {
+      return getCoords();
+    }
+    else if (config.customLocation) {
+      return config.customLocation;
+    }
+    else {
+      return 'Warsaw, PL';
+    }
+  });
+}
+
+function getCoords() {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(position => resolve(position.coords));
+  });
+}
+
+function getConfig() {
+  return storageHelpers.getFromStorage('config');
+}
+
+function fetchNewData(state, location) {
   const APPID = '8abe6b7721a64a5e06660f56047d1f59';
   const BASEURL = 'http://api.openweathermap.org/data/2.5/';
+  let query;
 
-  const today = fetch(`${BASEURL}weather?q=${city}&APPID=${APPID}`)
+  if (typeof location === 'string') {
+    if (/\d/.test(location)) {
+      query = `id=${location}`;
+    }
+    else {
+      query = `q=${location}`;
+    }
+  }
+  else {
+    query = `lat=${location.latitude}&lon=${location.longitude}`;
+  }
+
+  const today = fetch(`${BASEURL}weather?${query}&APPID=${APPID}`)
   .then(response => {
     if (response.ok) {
       return response.json();
@@ -66,7 +105,7 @@ function fetchNewData(state) {
     }
   });
 
-  const forecast = fetch(`${BASEURL}forecast?q=${city}&APPID=${APPID}`)
+  const forecast = fetch(`${BASEURL}forecast?${query}&APPID=${APPID}`)
   .then(response => {
     if (response.ok) {
       return response.json();

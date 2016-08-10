@@ -4,6 +4,8 @@ const Immutable = require('immutable');
 const ConfigStoreState = Immutable.Record({
   features: undefined,
   searchEngine: undefined,
+  useGeolocation: false,
+  customLocation: undefined,
   tempUnits: 'celsius',
   ready: false,
 });
