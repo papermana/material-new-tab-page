@@ -99,6 +99,8 @@ function init() {
         weather.forecast[currentDay][time] = entry.weather;
       });
 
+      weather.forecast = weather.forecast.slice(0, 5);
+
       return weather;
     })
     .then(weather => {
