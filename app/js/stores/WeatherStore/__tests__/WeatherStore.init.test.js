@@ -46,7 +46,7 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
 
   function mockFetch(options) {
     return new Promise((resolve, reject) => {
-      if (options.argument.includes('/weather?q=')) {
+      if (options.argument.includes('/weather?')) {
         options.today = options.today || {};
 
         resolve({
@@ -104,7 +104,7 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
       if (argument === 'config') {
         response = options.config || {
           useGeolocation: false,
-          customLocation: false,
+          customLocation: 'Warsaw, PL',
         };
       }
       else if (argument === 'weatherData') {
@@ -283,6 +283,69 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
       const setInStorageData = storageHelpers.setInStorage.mock.calls[0][0];
 
       expect(JSON.parse(setInStorageData.weatherData)).toEqual(data.toJS());
+    });
+  });
+
+  it('should use geolocation if it is allowed in the configuration stored, and should fetch URL based on the received coordinates', () => {
+    Date.now = jest.fn(() => 123456);
+    storageHelpers.getFromStorage = mockGetFromStorage({
+      config: {
+        useGeolocation: true,
+      },
+    });
+    window.fetch = jest.fn(arg => mockFetch({argument: arg}));
+
+    //  JSDom, which is used by Jest, blocks modification of some
+    //  of the values attached to the global object because they're
+    //  marked as `[Unforgeable]` in the spec. Therefore we need to
+    //  go the extra mile to mock them like this:
+    Object.defineProperty(window.navigator, 'geolocation', {
+      value: {
+        getCurrentPosition: jest.fn(cb => cb({
+          coords: {
+            latitude: 100,
+            longitude: 50,
+          },
+        })),
+      },
+    });
+
+    return init()
+    .then(() => {
+      expect(window.navigator.geolocation.getCurrentPosition).toBeCalled();
+      expect(window.fetch.mock.calls[0][0]).toContain('?lat=100&lon=50');
+    });
+  });
+
+  it('should use a city ID if `useGeolocation` is false in config and `customLocation` is a string containing digits', () => {
+    Date.now = jest.fn(() => 123456);
+    storageHelpers.getFromStorage = mockGetFromStorage({
+      config: {
+        useGeolocation: false,
+        customLocation: 'ABCD1234',
+      },
+    });
+    window.fetch = jest.fn(arg => mockFetch({argument: arg}));
+
+    return init()
+    .then(() => {
+      expect(window.fetch.mock.calls[0][0]).toContain('?id=ABCD1234');
+    });
+  });
+
+  it('should use a city name if `useGeolocation` in config is false and `customlocation` is a string that doesn\'t contain digits', () => {
+    Date.now = jest.fn(() => 123456);
+    storageHelpers.getFromStorage = mockGetFromStorage({
+      config: {
+        useGeolocation: false,
+        customLocation: 'CityTown, AB',
+      },
+    });
+    window.fetch = jest.fn(arg => mockFetch({argument: arg}));
+
+    return init()
+    .then(() => {
+      expect(window.fetch.mock.calls[0][0]).toContain('?q=CityTown, AB');
     });
   });
 });
