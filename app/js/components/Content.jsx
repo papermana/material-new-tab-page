@@ -36,7 +36,11 @@ class Content extends React.PureComponent {
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
       },
+      message: {
+        textAlign: 'center',
+      },
     };
+
     const cardSize = this.props.dimensions.width < consts.breakpoints.medium ? 'small' : 'medium';
 
     if (this.props.dimensions.width < consts.breakpoints.medium) {
@@ -47,6 +51,7 @@ class Content extends React.PureComponent {
     }
 
     const features = this.props.model.config && this.props.model.config.features;
+    const areFeaturesEmpty = features && features.every(f => f === false);
     let cards = features && features
     .toMap()
     .filter((value, key) => value && cardsTemplate[key])
@@ -60,10 +65,22 @@ class Content extends React.PureComponent {
     });
 
     return <div id="main-wrapper" style={styles.wrapper} >
-       <div style={styles.main} >
-         {cards}
-       </div>
-     </div>;
+      {
+        !features && null
+      }
+      {
+        features && areFeaturesEmpty &&
+        <h1 style={styles.message} >
+          Go to settings and add some cards! :)
+        </h1>
+      }
+      {
+        features && !areFeaturesEmpty &&
+        <div style={styles.main} >
+          {cards}
+        </div>
+      }
+    </div>;
   }
 }
 
