@@ -86,7 +86,11 @@ ForecastItem.propTypes = {
 
 function WeatherCard(props) {
   if (!props.model.weather) {
-    return null;
+    return <MyCard size={props.size} >
+      <h2>
+        Go to options to set your location in order to get the weather forecast.
+      </h2>
+    </MyCard>;
   }
 
   const weather = props.model.weather.toJS();
