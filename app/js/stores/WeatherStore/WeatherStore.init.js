@@ -4,9 +4,6 @@ const actionCreators = require('@js/actionCreators');
 const storageHelpers = require('@utils/chromeStorageHelpers');
 
 
-//  test
-const city = 'Warsaw, PL';
-
 function init() {
   //  We only return this promise for the purposes of testing:
   return Promise.all([getDataFromStorage(), getLocation()])
@@ -63,7 +60,7 @@ function getLocation() {
       return config.customLocation;
     }
     else {
-      return 'Warsaw, PL';
+      throw new Error('No weather location set');
     }
   });
 }

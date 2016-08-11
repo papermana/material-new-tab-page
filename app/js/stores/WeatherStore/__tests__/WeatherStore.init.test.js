@@ -348,4 +348,21 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
       expect(window.fetch.mock.calls[0][0]).toContain('?q=CityTown, AB');
     });
   });
+
+  it('should throw an error if neither `useGeolocation` nor `customLocation` options are set in the config', () => {
+    Date.now = jest.fn(() => 123456);
+    storageHelpers.getFromStorage = mockGetFromStorage({
+      config: {
+        useGeolocation: false,
+        customLocation: undefined,
+      },
+    });
+    window.fetch = jest.fn(arg => mockFetch({argument: arg}));
+
+    return init()
+    .catch(e => {
+      expect(e).toEqual(new Error('No weather location set'));
+      expect(window.fetch).not.toBeCalled();
+    });
+  });
 });
