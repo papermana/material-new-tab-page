@@ -21,9 +21,18 @@ class Settings extends React.PureComponent {
   }
 
   featuresChange(e) {
+    let newConfig = this.state.newConfig;
+
+    if (e.target.name === 'weather' && !e.target.checked) {
+      newConfig = newConfig
+      .remove('useGeolocation')
+      .remove('customLocation')
+      .remove('tempUnits');
+    }
+
     this.setState({
       gotChanged: true,
-      newConfig: this.state.newConfig.setIn(['features', e.target.name], e.target.checked),
+      newConfig: newConfig.setIn(['features', e.target.name], e.target.checked),
     });
   }
 
@@ -107,13 +116,25 @@ class Settings extends React.PureComponent {
         {engines}
       </RadioButtonGroup>;
     })();
+    const showWeatherSettings = (
+      this.state.newConfig.getIn(['features', 'weather']) === true ||
+      (
+        config.features.weather &&
+        this.state.newConfig.getIn(['features', 'weather']) !== false
+      )
+    );
     const useGeolocation = config && <Checkbox label="Use geolocation to automatically detect where you are."
       name="useGeolocation"
       defaultChecked={config.useGeolocation}
+      disabled={!showWeatherSettings}
       onCheck={this.geolocationChange.bind(this)} />;
     const customLocation = config && <TextField name="customLocation"
       hintText="Enter city name of ID"
-      disabled={config.useGeolocation || this.state.newConfig.get('useGeolocation')}
+      disabled={
+        config.useGeolocation ||
+        this.state.newConfig.get('useGeolocation') ||
+        !showWeatherSettings
+      }
       onChange={this.customLocationChange.bind(this)} />;
     const tempUnits = config && (() => {
       const defaultUnits = config.tempUnits;
@@ -121,8 +142,12 @@ class Settings extends React.PureComponent {
       return <RadioButtonGroup name="tempUnits"
         defaultSelected={defaultUnits}
         onChange={this.tempUnitsChange.bind(this)} >
-        <RadioButton value="celsius" label="Celsius" />
-        <RadioButton value="fahrenheit" label="Fahrenheit" />
+        <RadioButton value="celsius"
+          label="Celsius"
+          disabled={!showWeatherSettings} />
+        <RadioButton value="fahrenheit"
+          label="Fahrenheit"
+          disabled={!showWeatherSettings} />
       </RadioButtonGroup>;
     })();
     const buttons = [
@@ -133,6 +158,14 @@ class Settings extends React.PureComponent {
         disabled={!this.state.gotChanged}
         onClick={this.save.bind(this)} />,
     ];
+
+    const styles = {
+      weatherSettings: {
+        opacity: showWeatherSettings ? 1 : 0.5,
+        pointerEvents: showWeatherSettings ? 'auto' : 'none',
+        WebkitUserSelect: showWeatherSettings ? 'auto' : 'none',
+      },
+    };
 
     return <Dialog open={true}
       title="Settings"
@@ -146,14 +179,16 @@ class Settings extends React.PureComponent {
       <h2>Search engine:</h2>
       {searchEngines}
 
-      <h2>Location:</h2>
-      <p>Used for getting the weather forecast.</p>
-      <p>It is best to use a city <a href="https://weather.codes/" target="_blank">unique ID</a>.</p>
-      {useGeolocation}
-      {customLocation}
+      <div style={styles.weatherSettings} >
+        <h2>Location:</h2>
+        <p>Used for getting the weather forecast.</p>
+        <p>It is best to use a city <a href="https://weather.codes/" target="_blank">unique ID</a>.</p>
+        {useGeolocation}
+        {customLocation}
 
-      <h2>Temperature units:</h2>
-      {tempUnits}
+        <h2>Temperature units:</h2>
+        {tempUnits}
+      </div>
     </Dialog>;
   }
 }
