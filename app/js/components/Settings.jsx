@@ -130,6 +130,7 @@ class Settings extends React.PureComponent {
       onCheck={this.geolocationChange.bind(this)} />;
     const customLocation = config && <TextField name="customLocation"
       hintText="Enter city name of ID"
+      defaultValue={config.customLocation}
       disabled={
         (
           this.state.newConfig.get('useGeolocation') === undefined &&
