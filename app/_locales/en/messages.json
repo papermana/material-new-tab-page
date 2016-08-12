@@ -99,10 +99,6 @@
     "message": "Weather Card",
     "description": "Name of the card showing a weather forecast"
   },
-  "geolocation_feature_description": {
-    "message": "Use geolocation to automatically detect where you are.",
-    "description": "Label next to a checkbox in settings"
-  },
   "settings_search_header": {
     "message": "Search engine:",
     "description": "Header text for the section in settings where the preferred search engine can be picked"
@@ -126,6 +122,10 @@
   "settings_location_description2_2": {
     "message": ".",
     "description": "Second line, part 3 of description for the location section in settings"
+  },
+  "settings_location_geolocation_hint": {
+    "message": "Use geolocation to automatically detect where you are.",
+    "description": "Label next to a checkbox in settings"
   },
   "settings_location_featurehint": {
     "message": "Enter city name or ID",

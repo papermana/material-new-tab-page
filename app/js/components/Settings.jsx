@@ -126,7 +126,7 @@ class Settings extends React.PureComponent {
     );
     const useGeolocation = config && <Checkbox
       name="useGeolocation"
-      label={_('geolocation_feature_description')}
+      label={_('settings_location_geolocation_hint')}
       defaultChecked={config.useGeolocation}
       disabled={!showWeatherSettings}
       onCheck={this.geolocationChange.bind(this)} />;
