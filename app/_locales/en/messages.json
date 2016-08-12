@@ -116,14 +116,14 @@
     "description": "First line of description for the location section in settings"
   },
   "settings_location_description2_1": {
-    "message": "It is best to use a city <a href='https://weather.codes/' target='_blank'>unique ID</a>.",
+    "message": "It is best to use a city ",
     "description": "Second line, part 1 of description for the location section in settings"
   },
   "settings_location_description2_2": {
     "message": "unique ID",
     "description": "Second line, part 2 of description for the location section in settings"
   },
-  "settings_location_description2_2": {
+  "settings_location_description2_3": {
     "message": ".",
     "description": "Second line, part 3 of description for the location section in settings"
   },

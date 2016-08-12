@@ -188,11 +188,13 @@ class Settings extends React.PureComponent {
       <div style={styles.weatherSettings} >
         <h2>{_('settings_location_header')}</h2>
         <p>{_('settings_location_description1')}</p>
-        <p>{
-            _('settings_location_description2_1') +
-            _('settings_location_description2_2') +
-            _('settings_location_description2_3')
-          }</p>
+        <p>
+          {_('settings_location_description2_1')}
+          <a href="https://weather.codes/" target="_blank">
+            {_('settings_location_description2_2')}
+          </a>
+          {_('settings_location_description2_3')}
+        </p>
         {useGeolocation}
         {customLocation}
 
