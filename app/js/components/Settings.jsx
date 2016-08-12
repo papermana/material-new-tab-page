@@ -131,7 +131,10 @@ class Settings extends React.PureComponent {
     const customLocation = config && <TextField name="customLocation"
       hintText="Enter city name of ID"
       disabled={
-        config.useGeolocation ||
+        (
+          this.state.newConfig.get('useGeolocation') === undefined &&
+          config.useGeolocation
+        ) ||
         this.state.newConfig.get('useGeolocation') ||
         !showWeatherSettings
       }
