@@ -141,6 +141,9 @@ class Settings extends React.PureComponent {
         this.state.newConfig.get('useGeolocation') ||
         !showWeatherSettings
       }
+      style={{
+        width: '100%',
+      }}
       onChange={this.customLocationChange.bind(this)} />;
     const tempUnits = config && (() => {
       const defaultUnits = config.tempUnits;
