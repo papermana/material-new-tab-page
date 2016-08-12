@@ -3,7 +3,6 @@ const Dialog = require('material-ui/Dialog').default;
 const FlatButton = require('material-ui/FlatButton').default;
 const actionCreators = require('@js/actionCreators');
 const manifest = require('@root/manifest.json');
-const _ = chrome.i18n.getMessage;
 
 
 class About extends React.PureComponent {

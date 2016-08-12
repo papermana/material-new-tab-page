@@ -4,7 +4,6 @@ const AppsCard = require('@components/AppsCard');
 const TopSitesCard = require('@components/TopSitesCard');
 const WeatherCard = require('@components/WeatherCard');
 const getScrollbarWidth = require('@utils/getScrollbarWidth');
-const _ = chrome.i18n.getMessage;
 
 
 const cardsTemplate = {

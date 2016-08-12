@@ -7,7 +7,8 @@
     "jasmine": true
   },
   "globals": {
-    "chrome": false
+    "chrome": false,
+    "_": false
   },
   "parserOptions": {
     "ecmaFeatures": {

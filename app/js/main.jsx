@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   //  Required by Material-UI:
   injectTapEventPlugin();
 
+  window._ = chrome.i18n.getMessage;
+
   const backgroundPage = chrome.extension.getBackgroundPage();
   const backgroundPageNode = backgroundPage.document.body.cloneNode(true);
   const reactParentNode = document.getElementById('react');

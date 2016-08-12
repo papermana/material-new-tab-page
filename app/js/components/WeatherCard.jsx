@@ -4,7 +4,6 @@ const FlatButton = require('material-ui/FlatButton').default;
 const ActionLaunch = require('material-ui/svg-icons/action/launch').default;
 const consts = require('@js/constants');
 const MyCard = require('@components/MyCard');
-const _ = chrome.i18n.getMessage;
 
 
 function dayOfTheWeek(day) {

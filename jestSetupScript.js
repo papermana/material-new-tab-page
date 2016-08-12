@@ -9,3 +9,5 @@ window.chrome = {
     }),
   },
 };
+
+window._ = window.chrome.i18n.getMessage;

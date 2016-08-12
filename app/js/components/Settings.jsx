@@ -8,7 +8,6 @@ const RadioButtonGroup = require('material-ui/RadioButton/RadioButtonGroup').def
 const TextField = require('material-ui/TextField').default;
 const actionCreators = require('@js/actionCreators');
 const consts = require('@js/constants');
-const _ = chrome.i18n.getMessage;
 
 
 class Settings extends React.PureComponent {

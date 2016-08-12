@@ -7,7 +7,6 @@ const ActionSearch = require('material-ui/svg-icons/action/search').default;
 const NavigationClose = require('material-ui/svg-icons/navigation/close').default;
 const actionCreators = require('@js/actionCreators');
 const consts = require('@js/constants');
-const _ = chrome.i18n.getMessage;
 
 
 class SearchBar extends React.PureComponent {

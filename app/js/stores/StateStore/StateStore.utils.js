@@ -5,7 +5,6 @@ const {
 const ConfigStore = require('@stores/ConfigStore');
 const AppsStore = require('@stores/AppsStore');
 const TopSitesStore = require('@stores/TopSitesStore');
-const _ = chrome.i18n.getMessage;
 
 
 function searchUrl(url, input) {

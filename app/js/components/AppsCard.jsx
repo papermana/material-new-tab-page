@@ -4,7 +4,6 @@ const actionCreators = require('@js/actionCreators');
 const consts = require('@js/constants');
 const MyCard = require('@components/MyCard');
 const Tile = require('@components/Tile');
-const _ = chrome.i18n.getMessage;
 
 
 function AppsCard(props) {
