@@ -1,4 +1,12 @@
 {
+  "app_name": {
+    "message": "Material New Tab Page",
+    "description": "Name of the app"
+  },
+  "app_description": {
+    "message": "Material New Tab Page for Chrome",
+    "description": "Description for the app"
+  },
   "button_cancel": {
     "message": "Cancel",
     "description": "Button label"
@@ -82,5 +90,19 @@
   "settings_tempunits_fahrenheit": {
     "message": "Fahrenheit",
     "description": "Temperature unit"
+  },
+  "about_title": {
+    "message": "About",
+    "description": "Title for the about dialog"
+  },
+  "about_version": {
+    "message": "Version $version$",
+    "description": "Version display in the about dialog",
+    "placeholders": {
+      "version": {
+        "content": "$1",
+        "example": "0.7.0"
+      }
+    }
   }
 }
