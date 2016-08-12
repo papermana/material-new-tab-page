@@ -4,17 +4,18 @@ const FlatButton = require('material-ui/FlatButton').default;
 const ActionLaunch = require('material-ui/svg-icons/action/launch').default;
 const consts = require('@js/constants');
 const MyCard = require('@components/MyCard');
+const _ = chrome.i18n.getMessage;
 
 
 function dayOfTheWeek(day) {
   const days = [
-    'Sun',
-    'Mon',
-    'Tue',
-    'Wed',
-    'Thu',
-    'Fri',
-    'Sat',
+    _('weathercard_sunday'),
+    _('weathercard_monday'),
+    _('weathercard_tuesday'),
+    _('weathercard_wednesday'),
+    _('weathercard_thursday'),
+    _('weathercard_friday'),
+    _('weathercard_saturday'),
   ];
 
   return days[day];
@@ -39,10 +40,10 @@ function colors(icon) {
 //  Takes kelvins as input:
 function temperature(temp, units) {
   if (units === 'celsius') {
-    return (temp - 273.15).toFixed() + '°C';
+    return (temp - 273.15).toFixed() + _('weathercard_celsius');
   }
   else if (units === 'fahrenheit') {
-    return (temp * (9 / 5) - 459.67).toFixed() + '°F';
+    return (temp * (9 / 5) - 459.67).toFixed() + _('weathercard_fahrenheit');
   }
   else {
     throw new Error('Temperature can be rendered either in Celsius or Fahrenheit!');
@@ -87,9 +88,7 @@ ForecastItem.propTypes = {
 function WeatherCard(props) {
   if (!props.model.config.useGeolocation && !props.model.config.customLocation) {
     return <MyCard size={props.size} >
-      <h2>
-        Go to options to set your location in order to get the weather forecast.
-      </h2>
+      <h2>{_('weathercard_message')}</h2>
     </MyCard>;
   }
   else if (!props.model.weather) {
@@ -106,7 +105,7 @@ function WeatherCard(props) {
   const actions = [
     <FlatButton key={0}
       href="http://openweathermap.org/city"
-      label="More weather"
+      label={_('weathercard_button')}
       labelPosition="before"
       icon={<ActionLaunch />} />,
   ];

@@ -108,5 +108,49 @@
   "appscard_button": {
     "message": "All Apps",
     "description": "Label for a button that shows the grid of all installed apps"
+  },
+  "weathercard_button": {
+    "message": "More weather",
+    "description": "Label for a button that opens an external site with weather forecasts"
+  },
+  "weathercard_monday": {
+    "message": "Mon",
+    "description": "Abbreviation for Monday"
+  },
+  "weathercard_tuesday": {
+    "message": "Tue",
+    "description": "Abbreviation for Tuesday"
+  },
+  "weathercard_wednesday": {
+    "message": "Wed",
+    "description": "Abbreviation for Wednesday"
+  },
+  "weathercard_thursday": {
+    "message": "Thu",
+    "description": "Abbreviation for Thursday"
+  },
+  "weathercard_friday": {
+    "message": "Fri",
+    "description": "Abbreviation for Friday"
+  },
+  "weathercard_saturday": {
+    "message": "Sat",
+    "description": "Abbreviation for Saturday"
+  },
+  "weathercard_sunday": {
+    "message": "Sun",
+    "description": "Abbreviation for Sunday"
+  },
+  "weathercard_celsius": {
+    "message": "°C",
+    "description": "Symbol for 'degrees Celsius'"
+  },
+  "weathercard_fahrenheit": {
+    "message": "°F",
+    "description": "Symbol for 'degrees Fahrenheit'"
+  },
+  "weathercard_message": {
+    "message": "Go to options to set your location in order to get the weather forecast.",
+    "description": "Message that shows up when the user has neither set their location nor enabled automatic geolocation"
   }
 }
