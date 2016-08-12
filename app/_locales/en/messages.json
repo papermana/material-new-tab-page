@@ -160,5 +160,29 @@
         "example": "0.7.0"
       }
     }
+  },
+  "statestore_search_text": {
+    "message": "Search on $search_engine$: $input$",
+    "description": "Label on a button that shows up when the user enters some text in the searchbar",
+    "placeholders": {
+      "search_engine": {
+        "content": "$1",
+        "example": "Google"
+      },
+      "input": {
+        "content": "$2",
+        "example": "Some search string"
+      }
+    }
+  },
+  "statestore_search_description": {
+    "message": "Perform a search on $search_engine$ with this query",
+    "description": "Popover text for the button in statestore_search_text",
+    "placeholders": {
+      "search_engine": {
+        "content": "$1",
+        "example": "Google"
+      }
+    }
   }
 }

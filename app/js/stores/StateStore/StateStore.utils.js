@@ -5,6 +5,7 @@ const {
 const ConfigStore = require('@stores/ConfigStore');
 const AppsStore = require('@stores/AppsStore');
 const TopSitesStore = require('@stores/TopSitesStore');
+const _ = chrome.i18n.getMessage;
 
 
 function searchUrl(url, input) {
@@ -33,8 +34,8 @@ const searchFunc = (function searchFuncFactory() {
 
       results.push(new SearchElement({
         id: 'search',
-        name: `Search on ${engine.name}: ${input}`,
-        description: `Perform a search on ${engine.name} with this query`,
+        name: _('statestore_search_text', [engine.name, input]),
+        description: _('statestore_search_description', engine.name),
         url: searchUrl(engine.url, input),
         icon: 'assets/ic_search_black_24px.svg',
       }));
