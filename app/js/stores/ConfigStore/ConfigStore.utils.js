@@ -148,7 +148,7 @@ function setConfig(changes, state) {
     state = state.set('tempUnits', changes.tempUnits);
   }
 
-  if (changes.useGeolocation) {
+  if (changes.useGeolocation !== undefined) {
     state = state.set('useGeolocation', changes.useGeolocation);
   }
 
@@ -156,7 +156,7 @@ function setConfig(changes, state) {
     state = state.set('customLocation', changes.customLocation);
   }
 
-  if (changes.useGeolocation || changes.customLocation) {
+  if (changes.useGeolocation !== undefined || changes.customLocation) {
     //  Refetch the weather data:
     storageHelpers.removeFromStorage('weatherData');
   }
