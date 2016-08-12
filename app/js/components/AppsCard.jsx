@@ -4,6 +4,7 @@ const actionCreators = require('@js/actionCreators');
 const consts = require('@js/constants');
 const MyCard = require('@components/MyCard');
 const Tile = require('@components/Tile');
+const _ = chrome.i18n.getMessage;
 
 
 function AppsCard(props) {
@@ -20,7 +21,7 @@ function AppsCard(props) {
   .toJS();
   const actions = [
     <FlatButton key={0}
-      label="All Apps"
+      label={_('appscard_button')}
       onClick={() => actionCreators.goTo('allApps')} />,
   ];
 

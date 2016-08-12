@@ -104,5 +104,9 @@
         "example": "0.7.0"
       }
     }
+  },
+  "appscard_button": {
+    "message": "All Apps",
+    "description": "Label for a button that shows the grid of all installed apps"
   }
 }
