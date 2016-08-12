@@ -48,6 +48,7 @@
       "<rootDir>/node_modules/immutable",
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/react-dom"
-    ]
+    ],
+    "setupTestFrameworkScriptFile": "./jestSetupScript.js"
   }
 }

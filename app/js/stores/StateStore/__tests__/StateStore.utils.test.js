@@ -70,8 +70,8 @@ describe('`StateStore.utils.js` - A set of utility functions for the `StateStore
     function getSearchLinkFor(searchString, resultUrl) {
       return new SearchElement({
         id: 'search',
-        name: `Search on Google: ${searchString}`,
-        description: 'Perform a search on Google with this query',
+        name: 'statestore_search_text|Google|' + searchString,
+        description: 'statestore_search_description|Google',
         url: resultUrl || 'https://google.com/search?q=' + searchString,
         icon: 'assets/ic_search_black_24px.svg',
       });
@@ -94,10 +94,9 @@ describe('`StateStore.utils.js` - A set of utility functions for the `StateStore
       mockAppsStore();
       mockTopSitesStore();
 
-      window.chrome = {
-        bookmarks: {
-          search: jest.fn(),
-        },
+      window.chrome = window.chrome || {};
+      window.chrome.bookmarks = {
+        search: jest.fn(),
       };
       window.test = jest.fn();
     });
