@@ -17,3 +17,9 @@ This version is made using React, Flux, Immutable and the [material-ui](material
 
 ### Geolocation
 Due to [a bug in chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=278555) it is currently impossible to request `geolocation` as an optional permission. This might get solved later.
+
+### TODO
+* Start-up performance
+* Better scrolling
+* Replace the big icon in WeatherCard with some nicer drawing
+* Refactor code, add more comments
