@@ -46,11 +46,16 @@ const config = {
           presets: ['react', 'es2015'],
         },
       },
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
+      },
     ],
   },
   resolve: {
     root,
     alias: {
+      '@root': 'app',
       '@js': 'app/js',
       '@stores': 'app/js/stores',
       '@components': 'app/js/components',

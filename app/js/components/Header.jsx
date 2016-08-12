@@ -34,6 +34,9 @@ function Menu(props) {
     <MenuItem style={styles.menuItem}
       primaryText="Settings"
       onClick={() => actionCreators.goTo('settings')} />
+    <MenuItem style={styles.menuItem}
+      primaryText="About"
+      onClick={() => actionCreators.goTo('about')} />
   </IconMenu>;
 }
 
