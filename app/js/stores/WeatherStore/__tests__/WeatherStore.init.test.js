@@ -124,6 +124,8 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
     window.fetch = jest.fn(arg => mockFetch({argument: arg}));
     Date.now = jest.fn();
     window.test = jest.fn();
+    window.chrome = window.chrome || {};
+    window.chrome.i18n.getUILanguage = jest.fn(() => 'en');
   });
 
   it('should try to extract saved weather data from local storage first', () => {
@@ -363,6 +365,15 @@ describe('`WeatherStore.init.js` - An init function for `WeatherStore`', () => {
     .catch(e => {
       expect(e).toEqual(new Error('No weather location set'));
       expect(window.fetch).not.toBeCalled();
+    });
+  });
+
+  it('should include the appriopriate language code in the URL it fetches', () => {
+    Date.now = jest.fn(() => 123456);
+
+    return init()
+    .then(() => {
+      expect(window.fetch.mock.calls[0][0]).toContain('&lang=en');
     });
   });
 });

@@ -78,6 +78,7 @@ function getConfig() {
 function fetchNewData(state, location) {
   const APPID = '8abe6b7721a64a5e06660f56047d1f59';
   const BASEURL = 'http://api.openweathermap.org/data/2.5/';
+  const lang = chrome.i18n.getUILanguage();
   let query;
 
   if (typeof location === 'string') {
@@ -92,7 +93,7 @@ function fetchNewData(state, location) {
     query = `lat=${location.latitude}&lon=${location.longitude}`;
   }
 
-  const today = fetch(`${BASEURL}weather?${query}&APPID=${APPID}`)
+  const today = fetch(`${BASEURL}weather?${query}&APPID=${APPID}&lang=${lang}`)
   .then(response => {
     if (response.ok) {
       return response.json();
@@ -102,7 +103,7 @@ function fetchNewData(state, location) {
     }
   });
 
-  const forecast = fetch(`${BASEURL}forecast?${query}&APPID=${APPID}`)
+  const forecast = fetch(`${BASEURL}forecast?${query}&APPID=${APPID}&lang=${lang}`)
   .then(response => {
     if (response.ok) {
       return response.json();
