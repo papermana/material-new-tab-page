@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Material New Tab Page",
+  "name": "__MSG_app_name__",
   "version": "0.7.0",
-  "description": "Material New Tab Page for Chrome",
+  "description": "__MSG_app_description__",
   "permissions": [
     "storage",
     "geolocation"
