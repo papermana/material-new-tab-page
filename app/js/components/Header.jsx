@@ -9,6 +9,7 @@ const materialColors = require('material-ui/styles/colors');
 const actionCreators = require('@js/actionCreators');
 const consts = require('@js/constants');
 const SearchBar = require('@components/SearchBar');
+const _ = chrome.i18n.getMessage;
 
 const HEADER_COLOR = materialColors.blue500;
 
@@ -32,10 +33,10 @@ function Menu(props) {
     targetOrigin={origin}
     desktop={true} >
     <MenuItem style={styles.menuItem}
-      primaryText="Settings"
+      primaryText={_('settings_title')}
       onClick={() => actionCreators.goTo('settings')} />
     <MenuItem style={styles.menuItem}
-      primaryText="About"
+      primaryText={_('about_title')}
       onClick={() => actionCreators.goTo('about')} />
   </IconMenu>;
 }
