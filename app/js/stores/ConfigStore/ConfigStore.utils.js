@@ -50,6 +50,9 @@ function changePermissions(newFeatures, oldFeatures) {
       permissions: ['bookmarks'],
     },
     weather: {
+      //  Currently `geolocation` cannot be requested as an optional permission.
+      //  (https://bugs.chromium.org/p/chromium/issues/detail?id=278555)
+      // permissions: ['geolocation'],
       origins: ['http://api.openweathermap.org/*'],
     },
   };

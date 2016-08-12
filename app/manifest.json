@@ -4,14 +4,14 @@
   "version": "0.7.0",
   "description": "Material New Tab Page for Chrome",
   "permissions": [
-    "storage"
+    "storage",
+    "geolocation"
   ],
   "optional_permissions": [
     "management",
     "topSites",
     "chrome://favicon/*",
     "bookmarks",
-    "geolocation",
     "http://api.openweathermap.org/"
   ],
   "chrome_url_overrides": { "newtab": "index.html" },

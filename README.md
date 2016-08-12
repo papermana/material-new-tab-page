@@ -14,3 +14,6 @@ This version is made using React, Flux, Immutable and the [material-ui](material
 * ~~Prerender some parts of the UI to give the user the subjective feeling of a snappier response.~~ Done using a background page.
 * ~~Make some `require`s asynchronous.~~ Done for the main bundle but maybe could be used in other parts, e.g. only loading dialogs on demand.
 * ?
+
+### Geolocation
+Due to [a bug in chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=278555) it is currently impossible to request `geolocation` as an optional permission. This might get solved later.
