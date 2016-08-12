@@ -7,6 +7,7 @@ const ActionSearch = require('material-ui/svg-icons/action/search').default;
 const NavigationClose = require('material-ui/svg-icons/navigation/close').default;
 const actionCreators = require('@js/actionCreators');
 const consts = require('@js/constants');
+const _ = chrome.i18n.getMessage;
 
 
 class SearchBar extends React.PureComponent {
@@ -85,7 +86,7 @@ class SearchBar extends React.PureComponent {
           hintStyle={styles.searchHint}
           dataSource={source}
           searchText={this.state.input}
-          hintText="Type in to search"
+          hintText={_('searchbar_hint')}
           openOnFocus
           fullWidth
           underlineShow={false}

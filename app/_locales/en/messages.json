@@ -23,6 +23,10 @@
     "message": "Go to settings and add some cards! :)",
     "description": "Message that shows up if the user hasn't enabled any cards"
   },
+  "searchbar_hint": {
+    "message": "Type in to search",
+    "description": "Hint in a search textfield"
+  },
   "appscard_button": {
     "message": "All Apps",
     "description": "Label for a button that shows the grid of all installed apps"
@@ -156,5 +160,5 @@
         "example": "0.7.0"
       }
     }
-  },
+  }
 }
