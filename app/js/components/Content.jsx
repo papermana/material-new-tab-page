@@ -4,6 +4,7 @@ const AppsCard = require('@components/AppsCard');
 const TopSitesCard = require('@components/TopSitesCard');
 const WeatherCard = require('@components/WeatherCard');
 const getScrollbarWidth = require('@utils/getScrollbarWidth');
+const _ = chrome.i18n.getMessage;
 
 
 const cardsTemplate = {
@@ -73,7 +74,7 @@ class Content extends React.PureComponent {
       {
         features && numOfCards === 0 &&
         <h1 style={styles.message} >
-          Go to settings and add some cards! :)
+          {_('content_message')}
         </h1>
       }
       {
