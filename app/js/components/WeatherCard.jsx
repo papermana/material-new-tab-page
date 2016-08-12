@@ -157,7 +157,12 @@ const styles = {
     marginBottom: '0.55em',
     fontSize: 24,
     textTransform: 'uppercase',
-    textShadow: '1px 1px 1px white, -1px -1px 1px white',
+    textShadow: `
+      1px 1px 1px white,
+      -1px -1px 1px white,
+      2px 2px 1px white,
+      -2px -2px 1px white
+    `,
     overflow: 'hidden',
     textOverflow: 'ellipsis',
   },
