@@ -1,0 +1,188 @@
+{
+  "app_name": {
+    "message": "Materialna strona Nowej Karty",
+    "description": "Name of the app"
+  },
+  "app_description": {
+    "message": "Materialna strona Nowej Karty dla Chrome'a",
+    "description": "Description for the app"
+  },
+  "button_cancel": {
+    "message": "Anuluj",
+    "description": "Button label"
+  },
+  "button_save": {
+    "message": "Zapisz",
+    "description": "Button label"
+  },
+  "button_close": {
+    "message": "Zamknij",
+    "description": "Button label"
+  },
+  "content_message": {
+    "message": "Otwórz ustawienia i dodaje jakieś karty! :)",
+    "description": "Message that shows up if the user hasn't enabled any cards"
+  },
+  "searchbar_hint": {
+    "message": "Wpisz coś, aby to wyszukać",
+    "description": "Hint in a search textfield"
+  },
+  "appscard_button": {
+    "message": "Wszystkie apki",
+    "description": "Label for a button that shows the grid of all installed apps"
+  },
+  "weathercard_button": {
+    "message": "Więcej pogody",
+    "description": "Label for a button that opens an external site with weather forecasts"
+  },
+  "weathercard_monday": {
+    "message": "Pon",
+    "description": "Abbreviation for Monday"
+  },
+  "weathercard_tuesday": {
+    "message": "Wto",
+    "description": "Abbreviation for Tuesday"
+  },
+  "weathercard_wednesday": {
+    "message": "Śro",
+    "description": "Abbreviation for Wednesday"
+  },
+  "weathercard_thursday": {
+    "message": "Czw",
+    "description": "Abbreviation for Thursday"
+  },
+  "weathercard_friday": {
+    "message": "Pią",
+    "description": "Abbreviation for Friday"
+  },
+  "weathercard_saturday": {
+    "message": "Sob",
+    "description": "Abbreviation for Saturday"
+  },
+  "weathercard_sunday": {
+    "message": "Nie",
+    "description": "Abbreviation for Sunday"
+  },
+  "weathercard_celsius": {
+    "message": "°C",
+    "description": "Symbol for 'degrees Celsius'"
+  },
+  "weathercard_fahrenheit": {
+    "message": "°F",
+    "description": "Symbol for 'degrees Fahrenheit'"
+  },
+  "weathercard_message": {
+    "message": "Otwórz ustawienia i ustaw swoją lokację, aby otrzymać prognozę pogody.",
+    "description": "Message that shows up when the user has neither set their location nor enabled automatic geolocation"
+  },
+  "settings_title": {
+    "message": "Ustawienia",
+    "description": "Title for the dialog showing settings"
+  },
+  "settings_features_header": {
+    "message": "Włącz opcje:",
+    "description": "Header text for the section in settings where features can be enabled or disabled"
+  },
+  "settings_features_description": {
+    "message": "Niektóre z opcji mogą wymagać dodatkowych uprawnień.",
+    "description": "Description for the features section in settings"
+  },
+  "settings_features_name_appscard": {
+    "message": "Karta aplikacji",
+    "description": "Name of the card showing user's apps"
+  },
+  "settings_features_name_topsitescard": {
+    "message": "Karta najczęściej odwiedzanych stron",
+    "description": "Name of the card showing most visited sites"
+  },
+  "settings_features_name_bookmarkssearch": {
+    "message": "Przeszukiwanie zakładek",
+    "description": "Name of the feature allowing for bookmarks to be searched"
+  },
+  "settings_features_name_weathercard": {
+    "message": "Karta pogody",
+    "description": "Name of the card showing a weather forecast"
+  },
+  "settings_search_header": {
+    "message": "Wyszukiwarka:",
+    "description": "Header text for the section in settings where the preferred search engine can be picked"
+  },
+  "settings_location_header": {
+    "message": "Lokacja:",
+    "description": "Header text for the section in settings where location can be set for the weather forecast"
+  },
+  "settings_location_description1": {
+    "message": "Używane w celu ściągnięcia prognozy pogody.",
+    "description": "First line of description for the location section in settings"
+  },
+  "settings_location_description2_1": {
+    "message": "Najlepiej jest użyć ",
+    "description": "Second line, part 1 of description for the location section in settings"
+  },
+  "settings_location_description2_2": {
+    "message": "unikalnego identyfikatora",
+    "description": "Second line, part 2 of description for the location section in settings"
+  },
+  "settings_location_description2_3": {
+    "message": " swojego miasta.",
+    "description": "Second line, part 3 of description for the location section in settings"
+  },
+  "settings_location_geolocation_hint": {
+    "message": "Użyj geolokacji, by automatycznie wykryć, gdzie jesteś.",
+    "description": "Label next to a checkbox in settings"
+  },
+  "settings_location_featurehint": {
+    "message": "Wprowadź nazwę miasta albo identyfikator",
+    "description": "Hint in a textfield where location for the weather forecast can be set"
+  },
+  "settings_tempunits_header": {
+    "message": "Jednostki temperatury:",
+    "description": "Header text for the section in settings where preferred temperature units can be picked"
+  },
+  "settings_tempunits_celsius": {
+    "message": "Celsjusz",
+    "description": "Temperature unit"
+  },
+  "settings_tempunits_fahrenheit": {
+    "message": "Fahrenheit",
+    "description": "Temperature unit"
+  },
+  "about_title": {
+    "message": "Informacje",
+    "description": "Title for the about dialog"
+  },
+  "about_version": {
+    "message": "Wersja $version$",
+    "description": "Version display in the about dialog",
+    "placeholders": {
+      "version": {
+        "content": "$1",
+        "example": "0.7.0"
+      }
+    }
+  },
+  "statestore_search_text": {
+    "message": "Wyszukaj w $search_engine$: $input$",
+    "description": "Label on a button that shows up when the user enters some text in the searchbar",
+    "placeholders": {
+      "search_engine": {
+        "content": "$1",
+        "example": "Google"
+      },
+      "input": {
+        "content": "$2",
+        "example": "Some search string"
+      }
+    }
+  },
+  "statestore_search_description": {
+    "message": "Przeprowadź akcję wyszukiwania w $search_engine$ używając tego zapytania",
+    "description": "Popover text for the button in statestore_search_text",
+    "placeholders": {
+      "search_engine": {
+        "content": "$1",
+        "example": "Google"
+      }
+    }
+  }
+}
