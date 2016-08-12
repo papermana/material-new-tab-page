@@ -42,16 +42,7 @@ class Content extends React.PureComponent {
     };
 
     const cardSize = this.props.dimensions.width < consts.breakpoints.medium ? 'small' : 'medium';
-
-    if (this.props.dimensions.width < consts.breakpoints.medium) {
-      styles.main.width = consts.cardWidth(cardSize) + consts.cardMargin * 2;
-    }
-    else {
-      styles.main.width = (consts.cardWidth(cardSize) + consts.cardMargin * 2) * 2;
-    }
-
     const features = this.props.model.config && this.props.model.config.features;
-    const areFeaturesEmpty = features && features.every(f => f === false);
     let cards = features && features
     .toMap()
     .filter((value, key) => value && cardsTemplate[key])
@@ -63,19 +54,30 @@ class Content extends React.PureComponent {
         model={this.props.model}
         size={cardSize} />;
     });
+    const numOfCards = cards && cards.size;
+
+    if (
+      this.props.dimensions.width < consts.breakpoints.medium ||
+      numOfCards === 1
+    ) {
+      styles.main.width = consts.cardWidth(cardSize) + consts.cardMargin * 2;
+    }
+    else {
+      styles.main.width = (consts.cardWidth(cardSize) + consts.cardMargin * 2) * 2;
+    }
 
     return <div id="main-wrapper" style={styles.wrapper} >
       {
         !features && null
       }
       {
-        features && areFeaturesEmpty &&
+        features && numOfCards === 0 &&
         <h1 style={styles.message} >
           Go to settings and add some cards! :)
         </h1>
       }
       {
-        features && !areFeaturesEmpty &&
+        features && numOfCards > 0 &&
         <div style={styles.main} >
           {cards}
         </div>
