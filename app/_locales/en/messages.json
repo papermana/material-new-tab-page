@@ -1,0 +1,86 @@
+{
+  "button_cancel": {
+    "message": "Cancel",
+    "description": "Button label"
+  },
+  "button_save": {
+    "message": "Save",
+    "description": "Button label"
+  },
+  "button_close": {
+    "message": "Close",
+    "description": "Button label"
+  },
+  "settings_title": {
+    "message": "Settings",
+    "description": "Title for the dialog showing settings"
+  },
+  "settings_features_header": {
+    "message": "Enable features:",
+    "description": "Header text for the section in settings where features can be enabled or disabled"
+  },
+  "settings_features_description": {
+    "message": "Some of the features may request additional permissions.",
+    "description": "Description for the features section in settings"
+  },
+  "settings_features_name_appscard": {
+    "message": "Apps Card",
+    "description": "Name of the card showing user's apps"
+  },
+  "settings_features_name_topsitescard": {
+    "message": "Top Sites Card",
+    "description": "Name of the card showing most visited sites"
+  },
+  "settings_features_name_bookmarkssearch": {
+    "message": "Bookmarks Search",
+    "description": "Name of the feature allowing for bookmarks to be searched"
+  },
+  "settings_features_name_weathercard": {
+    "message": "Weather Card",
+    "description": "Name of the card showing a weather forecast"
+  },
+  "geolocation_feature_description": {
+    "message": "Use geolocation to automatically detect where you are.",
+    "description": "Label next to a checkbox in settings"
+  },
+  "settings_search_header": {
+    "message": "Search engine:",
+    "description": "Header text for the section in settings where the preferred search engine can be picked"
+  },
+  "settings_location_header": {
+    "message": "Location:",
+    "description": "Header text for the section in settings where location can be set for the weather forecast"
+  },
+  "settings_location_description1": {
+    "message": "Used for getting the weather forecast.",
+    "description": "First line of description for the location section in settings"
+  },
+  "settings_location_description2_1": {
+    "message": "It is best to use a city <a href='https://weather.codes/' target='_blank'>unique ID</a>.",
+    "description": "Second line, part 1 of description for the location section in settings"
+  },
+  "settings_location_description2_2": {
+    "message": "unique ID",
+    "description": "Second line, part 2 of description for the location section in settings"
+  },
+  "settings_location_description2_2": {
+    "message": ".",
+    "description": "Second line, part 3 of description for the location section in settings"
+  },
+  "settings_location_featurehint": {
+    "message": "Enter city name or ID",
+    "description": "Hint in a textfield where location for the weather forecast can be set"
+  },
+  "settings_tempunits_header": {
+    "message": "Temperature units:",
+    "description": "Header text for the section in settings where preferred temperature units can be picked"
+  },
+  "settings_tempunits_celsius": {
+    "message": "Celsius",
+    "description": "Temperature unit"
+  },
+  "settings_tempunits_fahrenheit": {
+    "message": "Fahrenheit",
+    "description": "Temperature unit"
+  }
+}

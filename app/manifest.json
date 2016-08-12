@@ -18,5 +18,6 @@
   "background": {
     "page": "backgroundPage.html",
     "persistent": true
-  }
+  },
+  "default_locale": "en"
 }

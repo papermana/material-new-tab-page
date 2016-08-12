@@ -82,6 +82,10 @@ const config = {
         from: 'css',
         to: 'css',
       },
+      {
+        from: '_locales',
+        to: '_locales',
+      },
     ]),
   ],
 };
