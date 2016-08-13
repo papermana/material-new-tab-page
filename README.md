@@ -23,3 +23,4 @@ Due to [a bug in chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=2
 * Better scrolling
 * Replace the big icon in WeatherCard with some nicer drawing
 * Refactor code, add more comments
+* Drag-and-drop in the applications card
